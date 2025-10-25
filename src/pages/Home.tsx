@@ -43,21 +43,21 @@ const Home: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
+        staggerChildren: 0.15,
+        delayChildren: 0.2
       }
     }
   }
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0, scale: 0.95 },
+    hidden: { y: 30, opacity: 0, scale: 0.9 },
     visible: {
       y: 0,
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] // macOS-like spring
       }
     }
   }
@@ -150,97 +150,59 @@ const Home: React.FC = () => {
 Building intelligent and seamless digital solutions that blend clean design, smart automation, and the power of AI-driven innovation.
         </motion.p>
 
-        {/* CTA Buttons with macOS Big Sur Styling */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
-            className="text-white font-medium px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-base sm:text-lg backdrop-blur-sm w-full sm:w-auto"
-            style={{ 
-              fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
-              background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              fontWeight: 500,
-              letterSpacing: '0.02em',
-              boxShadow: '0 10px 40px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)'
-            }}
-          >
-            View My Work
-          </motion.button>
-          
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
-            className="flex items-center justify-center space-x-3 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-base sm:text-lg backdrop-blur-sm border border-white/30 w-full sm:w-auto"
-            style={{ 
-              fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
-              background: 'rgba(255, 255, 255, 0.2)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              fontWeight: 500,
-              letterSpacing: '0.02em',
-              boxShadow: '0 10px 40px rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2)',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)'
-            }}
-          >
-            <Download className="w-5 h-5" />
-            <span>Download Resume</span>
-          </motion.button>
-        </motion.div>
 
 
-        {/* Minimalistic 3D Floating Elements */}
+        {/* Enhanced Floating Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-white/20 rounded-full"
+              className="absolute bg-white/15 rounded-full"
               style={{
-                left: `${20 + i * 15}%`,
-                top: `${30 + i * 10}%`,
+                width: `${8 + Math.random() * 4}px`,
+                height: `${8 + Math.random() * 4}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -20, 0],
-                x: [0, 10, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.8, 0.3],
+                y: [0, -40, 0],
+                x: [0, 20, 0],
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.7, 0.2],
+                rotate: [0, 180, 360],
               }}
               transition={{
-                duration: 3 + i * 0.5,
+                duration: 4 + Math.random() * 2,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.3,
+                delay: Math.random() * 2,
               }}
             />
           ))}
           
           {/* Larger floating elements */}
-          {[...Array(3)].map((_, i) => (
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={`large-${i}`}
-              className="absolute w-4 h-4 bg-white/10 rounded-full"
+              className="absolute bg-white/10 rounded-full"
               style={{
-                left: `${60 + i * 20}%`,
-                top: `${20 + i * 25}%`,
+                width: `${16 + Math.random() * 8}px`,
+                height: `${16 + Math.random() * 8}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                x: [0, 15, 0],
-                scale: [1, 1.5, 1],
-                opacity: [0.2, 0.6, 0.2],
+                y: [0, -50, 0],
+                x: [0, 25, 0],
+                scale: [1, 1.4, 1],
+                opacity: [0.1, 0.5, 0.1],
+                rotate: [0, -180, -360],
               }}
               transition={{
-                duration: 4 + i * 0.8,
+                duration: 5 + Math.random() * 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.5,
+                delay: Math.random() * 3,
               }}
             />
           ))}

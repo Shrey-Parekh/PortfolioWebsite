@@ -22,6 +22,11 @@
     cursor: default;
   }
 
+  /* Ensure SF Pro font is used throughout */
+  * {
+    font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
   /* Default Cursor Styles */
   * {
     cursor: default;
