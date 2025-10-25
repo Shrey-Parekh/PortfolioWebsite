@@ -19,20 +19,20 @@
     font-weight: 400;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M2 2l16 16M2 2l4 4M2 2l4-4" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+    cursor: default;
   }
 
-  /* macOS Cursor Styles */
+  /* Default Cursor Styles */
   * {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M2 2l16 16M2 2l4 4M2 2l4-4" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+    cursor: default;
   }
 
   button, a, [role="button"] {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M2 2l16 16M2 2l4 4M2 2l4-4" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'), pointer;
+    cursor: pointer;
   }
 
   .window-title-bar {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M2 2l16 16M2 2l4 4M2 2l4-4" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'), move;
+    cursor: move;
   }
 
   /* Cursor Follow Effect */

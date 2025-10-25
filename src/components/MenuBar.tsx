@@ -36,18 +36,18 @@ const MenuBar: React.FC = () => {
         borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
       }}
     >
-      <div className="flex items-center justify-between px-8 h-full max-w-screen-xl mx-auto">
+      <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 h-full max-w-screen-xl mx-auto">
         {/* Left Side - Brand */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-1 sm:space-x-2 cursor-pointer"
           >
-            <div className="w-4 h-4 rounded-sm" style={{ 
+            <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm" style={{ 
               background: 'linear-gradient(135deg, #007AFF 0%, #5856D6 100%)',
               boxShadow: '0 2px 8px rgba(0, 122, 255, 0.3)'
             }} />
-            <span className="text-sm font-medium text-white" style={{
+            <span className="text-xs sm:text-sm font-medium text-white hidden sm:block" style={{
               fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
               fontWeight: 500,
               textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
@@ -61,9 +61,9 @@ const MenuBar: React.FC = () => {
         <div className="flex-1 flex justify-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="px-4 py-1.5 rounded-lg hover:bg-white/10 transition-colors duration-200"
+            className="px-2 sm:px-4 py-1.5 rounded-lg hover:bg-white/10 transition-colors duration-200"
           >
-            <span className="text-sm font-medium text-white" style={{
+            <span className="text-xs sm:text-sm font-medium text-white" style={{
               fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
               fontWeight: 500,
               textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
@@ -74,36 +74,36 @@ const MenuBar: React.FC = () => {
         </div>
 
         {/* Right Side - System Indicators */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           {/* Theme Toggle */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
+            className="p-1 sm:p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
             aria-label="Toggle theme"
           >
             {isDarkMode ? (
-              <Sun className="w-4 h-4 text-white" />
+              <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
             ) : (
-              <Moon className="w-4 h-4 text-white" />
+              <Moon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
             )}
           </motion.button>
 
           {/* WiFi Indicator */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
+            className="p-1 sm:p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
           >
-            <Wifi className="w-4 h-4 text-white" />
+            <Wifi className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
           </motion.div>
 
           {/* Battery Indicator */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
+            className="p-1 sm:p-1.5 rounded-md hover:bg-white/10 transition-colors duration-200"
           >
-            <Battery className="w-4 h-4 text-white" />
+            <Battery className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
           </motion.div>
 
         </div>

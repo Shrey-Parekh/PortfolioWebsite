@@ -358,30 +358,39 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                     key={window.id}
                     initial={{ 
                       opacity: 0, 
-                      scale: 0.8, 
-                      y: 20,
-                      rotateX: -15,
-                      transformOrigin: 'center center'
+                      scale: 0.85, 
+                      y: 30,
+                      rotateX: -12,
+                      rotateY: 2,
+                      transformOrigin: 'center center',
+                      filter: 'blur(8px)'
                     }}
                     animate={{ 
                       opacity: window.isMinimized ? 0 : 1, 
-                      scale: window.isMinimized ? 0.3 : 1,
+                      scale: window.isMinimized ? 0.2 : 1,
                       x: window.isMaximized ? 0 : window.position.x,
                       y: window.isMaximized ? 32 : window.position.y,
                       width: window.isMaximized ? '100vw' : window.size.width,
                       height: window.isMaximized ? 'calc(100vh - 32px - 80px)' : window.size.height,
-                      rotateX: window.isMinimized ? -15 : 0,
+                      rotateX: window.isMinimized ? -12 : 0,
+                      rotateY: window.isMinimized ? 2 : 0,
+                      filter: window.isMinimized ? 'blur(8px)' : 'blur(0px)',
                     }}
                     exit={{ 
                       opacity: 0, 
-                      scale: 0.8, 
-                      y: 20,
-                      rotateX: -15,
-                      transition: { duration: 0.15 }
+                      scale: 0.85, 
+                      y: 30,
+                      rotateX: -12,
+                      rotateY: -2,
+                      filter: 'blur(8px)',
+                      transition: { 
+                        duration: 0.2,
+                        ease: [0.4, 0, 1, 1]
+                      }
                     }}
                     transition={{ 
-                      duration: 0.3, 
-                      ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier for macOS-like spring
+                      duration: 0.4, 
+                      ease: [0.16, 1, 0.3, 1], // macOS-like spring easing
                       type: 'tween'
                     }}
             className={`
@@ -401,17 +410,15 @@ const WindowManager: React.FC<WindowManagerProps> = ({
           >
             <div className="flex-1 flex flex-col overflow-hidden" style={{
               background: isDarkMode 
-                ? 'rgba(28, 28, 30, 0.9)' 
-                : 'rgba(255, 255, 255, 0.85)',
-              backdropFilter: 'blur(50px)',
-              WebkitBackdropFilter: 'blur(50px)',
+                ? '#1C1C1E' 
+                : '#FFFFFF',
               borderRadius: window.isMaximized ? '0' : '12px',
               border: isDarkMode 
                 ? '1px solid rgba(255, 255, 255, 0.1)' 
-                : '1px solid rgba(255, 255, 255, 0.2)',
+                : '1px solid rgba(0, 0, 0, 0.1)',
               boxShadow: isDarkMode 
-                ? '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.05)' 
-                : '0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(255, 255, 255, 0.05)',
+                ? '0 8px 32px rgba(0, 0, 0, 0.4)' 
+                : '0 8px 32px rgba(0, 0, 0, 0.12)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
             }}>
               {/* Window Title Bar */}
@@ -419,10 +426,8 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 className="window-title-bar flex items-center justify-between px-4 py-2.5 cursor-move select-none"
                 style={{
                   background: isDarkMode 
-                    ? 'rgba(28, 28, 30, 0.8)' 
-                    : 'rgba(255, 255, 255, 0.7)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
+                    ? '#2C2C2E' 
+                    : '#F2F2F7',
                   borderBottom: isDarkMode 
                     ? '1px solid rgba(255, 255, 255, 0.1)' 
                     : '1px solid rgba(0, 0, 0, 0.05)',
@@ -494,10 +499,11 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 animate={{
                   height: window.isMinimized ? 0 : 'auto',
                   opacity: window.isMinimized ? 0 : 1,
-                  scale: window.isMinimized ? 0.8 : 1
+                  scale: window.isMinimized ? 0.8 : 1,
+                  y: window.isMinimized ? -20 : 0
                 }}
                 transition={{ 
-                  duration: 0.25, 
+                  duration: 0.3, 
                   ease: [0.16, 1, 0.3, 1],
                   type: 'tween'
                 }}

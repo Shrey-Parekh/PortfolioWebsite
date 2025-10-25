@@ -9,12 +9,12 @@ const Home: React.FC = () => {
   const [textIndex, setTextIndex] = useState(0)
   
   const texts = [
-    'Full Stack Developer',
-    'AI/ML Engineer',
-    'Rust Developer', 
-    'Web Development Specialist',
-    'Technology Enthusiast',
-    'Software Architect'
+    'AI/ML Development',
+    'Rust Developer',
+    'Web Development ',
+    'Tech Enthusiast',
+    'Software Development',
+    'Embedded Systems'
   ]
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
         {/* Main Heading with macOS Big Sur Typography */}
         <motion.h1
           variants={itemVariants}
-          className="text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light mb-6 md:mb-8 tracking-tight"
           style={{ 
             fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif',
             fontWeight: 200,
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Shrey
+            Shrey Parekh
           </motion.span>
           <motion.span 
             className="block font-medium"
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
         {/* Animated Subtitle with macOS Big Sur Style */}
         <motion.div
           variants={itemVariants}
-          className="text-xl md:text-2xl mb-12 h-10 flex items-center justify-center"
+          className="text-lg sm:text-xl md:text-2xl mb-8 md:mb-12 h-8 md:h-10 flex items-center justify-center"
         >
           <span className="font-light tracking-wide" style={{ 
             fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
@@ -138,7 +138,7 @@ const Home: React.FC = () => {
         {/* Description with macOS Big Sur Typography */}
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl mb-16 max-w-4xl mx-auto leading-relaxed font-light"
+          className="text-base sm:text-lg md:text-xl mb-12 md:mb-16 max-w-4xl mx-auto leading-relaxed font-light px-4"
           style={{ 
             fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
             fontWeight: 300,
@@ -147,20 +147,19 @@ const Home: React.FC = () => {
             textShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
           }}
         >
-          Crafting pixel-perfect digital experiences with a passion for clean design, 
-          smooth animations, and cutting-edge web technologies.
+Building intelligent and seamless digital solutions that blend clean design, smart automation, and the power of AI-driven innovation.
         </motion.p>
 
         {/* CTA Buttons with macOS Big Sur Styling */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
         >
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.1, ease: "easeOut" }}
-            className="text-white font-medium px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-lg backdrop-blur-sm"
+            className="text-white font-medium px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-base sm:text-lg backdrop-blur-sm w-full sm:w-auto"
             style={{ 
               fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
               background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
@@ -179,7 +178,7 @@ const Home: React.FC = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.1, ease: "easeOut" }}
-            className="flex items-center space-x-3 text-white px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-lg backdrop-blur-sm border border-white/30"
+            className="flex items-center justify-center space-x-3 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 text-base sm:text-lg backdrop-blur-sm border border-white/30 w-full sm:w-auto"
             style={{ 
               fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
               background: 'rgba(255, 255, 255, 0.2)',

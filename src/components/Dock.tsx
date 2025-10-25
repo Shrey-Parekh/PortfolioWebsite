@@ -63,26 +63,23 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
   }
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
-      style={{
-        left: '50%',
-        transform: 'translateX(-50%)'
-      }}
-    >
-      <div className="flex items-center justify-center px-8 py-4 shadow-2xl" style={{
-        background: 'rgba(0, 0, 0, 0.4)',
-        backdropFilter: 'blur(40px)',
-        WebkitBackdropFilter: 'blur(40px)',
-        borderRadius: '24px',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
-        minWidth: 'fit-content',
-        margin: '0 auto'
-      }}>
+    <div className="fixed bottom-4 sm:bottom-6 md:bottom-8 left-0 right-0 z-50 flex justify-center px-4">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="flex items-center justify-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-2xl" 
+        style={{
+          background: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(40px)',
+          WebkitBackdropFilter: 'blur(40px)',
+          borderRadius: '20px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
+          minWidth: 'fit-content',
+          maxWidth: '90vw'
+        }}
+      >
         {dockItems.map((item, index) => {
           const Icon = item.icon
           const isActive = currentPage === item.id
@@ -96,19 +93,19 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
               )}
               
               <motion.div
-                className="relative flex flex-col items-center cursor-pointer group mx-3 dock-item"
+                className="relative flex flex-col items-center cursor-pointer group mx-1 sm:mx-2 md:mx-3 dock-item"
                 onMouseEnter={() => setHoveredItem(item.id)}
                 onMouseLeave={() => setHoveredItem(null)}
                 onClick={() => handleItemClick(item)}
-                whileHover={{ scale: 1.2, y: -12 }}
+                whileHover={{ scale: 1.15, y: -8 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
-                  scale: isHovered ? 1.2 : isActive ? 1.05 : 1,
-                  y: isHovered ? -12 : isActive ? -4 : 0
+                  scale: isHovered ? 1.15 : isActive ? 1.05 : 1,
+                  y: isHovered ? -8 : isActive ? -3 : 0
                 }}
                 transition={{
                   duration: 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  ease: [0.25, 0.46, 0.45, 0.94] // Professional easing
                 }}
               >
                 {/* Tooltip */}
@@ -119,16 +116,22 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
                     y: isHovered ? 0 : 5,
                     scale: isHovered ? 1 : 0.9
                   }}
-                  transition={{ duration: 0.1, ease: 'easeOut' }}
-                  className="absolute -top-12 bg-black/80 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none backdrop-blur-sm"
-                  style={{ fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                  transition={{ 
+                    duration: 0.1, 
+                    ease: 'easeOut' // Professional easing
+                  }}
+                  className="absolute -top-12 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none"
+                  style={{ 
+                    fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+                  }}
                 >
                   {item.label}
                 </motion.div>
 
                 {/* Icon Container */}
                 <div className={`
-                  w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-150 relative
+                  w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-150 relative
                   ${isActive 
                     ? 'bg-white/25' 
                     : 'hover:bg-white/15'
@@ -141,7 +144,7 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
                 }}>
                   <Icon 
                     className={`
-                      w-7 h-7 transition-all duration-150
+                      w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 transition-all duration-150
                       ${isActive 
                         ? 'text-white' 
                         : 'text-white/90'
@@ -152,11 +155,14 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
                   {/* Magnification Effect */}
                   {isHovered && (
                     <motion.div
-                      className="absolute inset-0 rounded-2xl bg-white/30"
+                      className="absolute inset-0 rounded-2xl bg-white/20"
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
-                      transition={{ duration: 0.1, ease: 'easeOut' }}
+                      transition={{ 
+                        duration: 0.1, 
+                        ease: 'easeOut' // Professional easing
+                      }}
                     />
                   )}
                 </div>
@@ -166,17 +172,20 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
                   <motion.div
                     layoutId="activeIndicator"
                     className="absolute -bottom-1 w-1 h-1 bg-white rounded-full"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.2,
+                      ease: 'easeOut' // Professional easing
+                    }}
                   />
                 )}
               </motion.div>
             </React.Fragment>
           )
         })}
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   )
 }
 
