@@ -393,19 +393,21 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       ease: [0.16, 1, 0.3, 1], // macOS-like spring easing
                       type: 'tween'
                     }}
-            className={`
-              absolute pointer-events-auto
-              ${window.isMaximized ? 'rounded-none' : 'rounded-2xl'}
-              ${isDragging && draggedWindow === window.id ? 'cursor-grabbing' : 'cursor-default'}
-            `}
-            style={{
-              zIndex: window.zIndex,
-              minWidth: '400px',
-              minHeight: '300px',
-              left: window.isMaximized ? '0' : 'auto',
-              right: window.isMaximized ? '0' : 'auto',
-              bottom: window.isMaximized ? '80px' : 'auto',
-            }}
+                    className={`
+                      absolute pointer-events-auto
+                      ${window.isMaximized ? 'rounded-none' : 'rounded-2xl'}
+                      ${isDragging && draggedWindow === window.id ? 'cursor-grabbing' : 'cursor-default'}
+                    `}
+                    style={{
+                      zIndex: window.zIndex,
+                      minWidth: window.innerWidth < 640 ? '280px' : '400px',
+                      minHeight: window.innerWidth < 640 ? '200px' : '300px',
+                      maxWidth: window.innerWidth < 640 ? 'calc(100vw - 32px)' : '90vw',
+                      maxHeight: window.innerWidth < 640 ? 'calc(100vh - 120px)' : '90vh',
+                      left: window.isMaximized ? '0' : 'auto',
+                      right: window.isMaximized ? '0' : 'auto',
+                      bottom: window.isMaximized ? '80px' : 'auto',
+                    }}
             onMouseDown={(e) => handleMouseDown(e, window.id)}
           >
             <div className="flex-1 flex flex-col overflow-hidden" style={{
