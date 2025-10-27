@@ -61,14 +61,17 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Hide default cursor and add macOS cursor */
+  /* Default Cursor Styles */
   * {
-    cursor: none !important;
+    cursor: default;
   }
-  
-  /* Ensure cursor is hidden on all elements */
-  body, html, div, span, a, button, input, textarea, select {
-    cursor: none !important;
+
+  button, a, [role="button"] {
+    cursor: pointer;
+  }
+
+  .window-title-bar {
+    cursor: move;
   }
 
   /* Cursor Follow Effect */

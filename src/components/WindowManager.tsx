@@ -5,7 +5,16 @@ import {
   Minus,
   Square,
   Maximize2,
+  Briefcase,
   Code,
+  MessageSquare,
+  Mail,
+  Linkedin,
+  Github,
+  ExternalLink,
+  GraduationCap,
+  Brain,
+  Rocket,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -62,9 +71,17 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                     key={i}
                     className="absolute w-2 h-2 rounded-full"
                     style={{
-                      background: isDarkMode 
-                        ? `linear-gradient(45deg, #3B82F6${Math.floor(Math.random() * 50 + 30).toString(16)}, #8B5CF6${Math.floor(Math.random() * 50 + 30).toString(16)})`
-                        : `linear-gradient(45deg, #FBBF24${Math.floor(Math.random() * 50 + 30).toString(16)}, #F59E0B${Math.floor(Math.random() * 50 + 30).toString(16)})`,
+                      background: isDarkMode
+                        ? `linear-gradient(45deg, #3B82F6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #8B5CF6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`
+                        : `linear-gradient(45deg, #FBBF24${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #F59E0B${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`,
                       left: `${Math.random() * 100}%`,
                       top: `${Math.random() * 100}%`,
                     }}
@@ -139,7 +156,10 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                           }}
                           whileHover={{
                             scale: 1.02,
-                            transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                            transition: {
+                              duration: 0.4,
+                              ease: [0.23, 1, 0.32, 1],
+                            },
                           }}
                         />
                       </div>
@@ -155,7 +175,9 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         boxShadow: isDarkMode
                           ? "0 2px 12px rgba(16, 185, 129, 0.3)"
                           : "0 2px 12px rgba(52, 211, 153, 0.4)",
-                        border: isDarkMode ? "2px solid #1C1C1E" : "2px solid #FFFFFF",
+                        border: isDarkMode
+                          ? "2px solid #1C1C1E"
+                          : "2px solid #FFFFFF",
                       }}
                       animate={{
                         scale: [1, 1.1, 1],
@@ -178,17 +200,16 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                           ? "rgba(59, 130, 246, 0.8)"
                           : "rgba(251, 191, 36, 0.8)",
                         backdropFilter: "blur(20px)",
-                        border: isDarkMode ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(255, 255, 255, 0.8)",
+                        border: isDarkMode
+                          ? "1px solid rgba(255, 255, 255, 0.1)"
+                          : "1px solid rgba(255, 255, 255, 0.8)",
                       }}
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.3 },
                       }}
                     >
-                      <Code 
-                        className="w-5 h-5 text-white" 
-                        strokeWidth={1.5}
-                      />
+                      <Code className="w-5 h-5 text-white" strokeWidth={1.5} />
                     </motion.div>
                   </motion.div>
                 </motion.div>
@@ -210,7 +231,8 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       <motion.h1
                         className="text-5xl lg:text-6xl xl:text-7xl font-bold"
                         style={{
-                          fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily:
+                            '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
                           letterSpacing: "-0.04em",
                           lineHeight: "0.9",
                           background: isDarkMode
@@ -232,7 +254,8 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         className="text-xl lg:text-2xl font-medium"
                         style={{
                           color: isDarkMode ? "#3B82F6" : "#F59E0B",
-                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily:
+                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                         }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -250,20 +273,26 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       transition={{ delay: 1, duration: 0.8 }}
                     >
                       {[
-                        { 
-                          text: "CS Student @ MPSTME", 
+                        {
+                          text: "CS Student @ MPSTME",
                           color: isDarkMode ? "#3B82F6" : "#1E40AF",
-                          bg: isDarkMode ? "rgba(59, 130, 246, 0.15)" : "#EFF6FF"
+                          bg: isDarkMode
+                            ? "rgba(59, 130, 246, 0.15)"
+                            : "#EFF6FF",
                         },
-                        { 
-                          text: "AI/ML Explorer", 
+                        {
+                          text: "AI/ML Explorer",
                           color: isDarkMode ? "#8B5CF6" : "#7C3AED",
-                          bg: isDarkMode ? "rgba(139, 92, 246, 0.15)" : "#F3E8FF"
+                          bg: isDarkMode
+                            ? "rgba(139, 92, 246, 0.15)"
+                            : "#F3E8FF",
                         },
-                        { 
-                          text: "Problem Solver", 
+                        {
+                          text: "Problem Solver",
                           color: isDarkMode ? "#10B981" : "#059669",
-                          bg: isDarkMode ? "rgba(16, 185, 129, 0.15)" : "#ECFDF5"
+                          bg: isDarkMode
+                            ? "rgba(16, 185, 129, 0.15)"
+                            : "#ECFDF5",
                         },
                       ].map((tag, index) => (
                         <motion.span
@@ -273,7 +302,8 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                             background: tag.bg,
                             color: tag.color,
                             border: `1px solid ${tag.color}40`,
-                            fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            fontFamily:
+                              '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           }}
                           whileHover={{
                             scale: 1.05,
@@ -311,36 +341,934 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         className="text-lg lg:text-xl leading-relaxed"
                         style={{
                           color: isDarkMode ? "#D1D5DB" : "#4B5563",
-                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily:
+                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           lineHeight: "1.8",
                         }}
                       >
-                        Currently in my third year of B.Tech Computer Science at MPSTME, 
-                        I'm fascinated by the intersection of AI, machine learning, and 
-                        real-world problem solving. 
+                        Currently in my third year of B.Tech Computer Science at
+                        MPSTME, I'm fascinated by the intersection of AI,
+                        machine learning, and real-world problem solving.
                       </p>
                       <p
                         className="text-lg lg:text-xl leading-relaxed"
                         style={{
                           color: isDarkMode ? "#D1D5DB" : "#4B5563",
-                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily:
+                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           lineHeight: "1.8",
                         }}
                       >
-                        When I'm not coding, you'll find me experimenting with new 
-                        frameworks, diving deep into research papers, or building 
-                        something that might just change how we interact with technology.
+                        When I'm not coding, you'll find me experimenting with
+                        new frameworks, diving deep into research papers, or
+                        building something that might just change how we
+                        interact with technology.
                       </p>
                     </div>
                   </motion.div>
                 </div>
               </motion.div>
             </div>
+
+            {/* Journey Milestones - Theme Reactive */}
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                delay: 1.8,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+              className="space-y-8"
+            >
+              <div className="text-center">
+                <h2
+                  className="text-3xl lg:text-4xl font-bold mb-4"
+                  style={{
+                    color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                    fontFamily:
+                      '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  My Journey So Far
+                </h2>
+                <p
+                  className="text-lg"
+                  style={{
+                    color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                    fontFamily:
+                      '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                  }}
+                >
+                  Every milestone tells a story
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  {
+                    icon: GraduationCap,
+                    title: "Academic Excellence",
+                    value: "3rd Year B.Tech",
+                    subtitle: "Computer Science @ MPSTME",
+                    description:
+                      "Building strong foundations in algorithms, data structures, and system design",
+                    color: isDarkMode ? "#3B82F6" : "#1E40AF",
+                    accent: isDarkMode ? "#3B82F6" : "#FBBF24",
+                  },
+                  {
+                    icon: Brain,
+                    title: "AI/ML Passion",
+                    value: "6+ Projects",
+                    subtitle: "From Vision to Voice AI",
+                    description:
+                      "Exploring computer vision, NLP, and machine learning applications",
+                    color: isDarkMode ? "#8B5CF6" : "#7C3AED",
+                    accent: isDarkMode ? "#8B5CF6" : "#F59E0B",
+                  },
+                  {
+                    icon: Rocket,
+                    title: "Innovation Drive",
+                    value: "Always Learning",
+                    subtitle: "Building Tomorrow's Solutions",
+                    description:
+                      "Constantly experimenting with new technologies and frameworks",
+                    color: isDarkMode ? "#10B981" : "#059669",
+                    accent: isDarkMode ? "#10B981" : "#EF4444",
+                  },
+                ].map((milestone, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 40, rotateX: -10 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 2 + index * 0.2,
+                      ease: [0.23, 1, 0.32, 1],
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      y: -10,
+                      rotateX: 5,
+                      transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                    }}
+                    className="relative group cursor-pointer"
+                  >
+                    <div
+                      className="rounded-3xl p-8 h-full relative overflow-hidden"
+                      style={{
+                        background: isDarkMode
+                          ? `linear-gradient(135deg, ${milestone.color}15 0%, ${milestone.color}05 100%)`
+                          : `linear-gradient(135deg, ${milestone.accent}15 0%, ${milestone.accent}05 100%)`,
+                        border: isDarkMode
+                          ? `1px solid ${milestone.color}30`
+                          : `1px solid ${milestone.accent}30`,
+                        boxShadow: isDarkMode
+                          ? `0 10px 40px ${milestone.color}10`
+                          : `0 10px 40px ${milestone.accent}10`,
+                      }}
+                    >
+                      {/* Animated Background Pattern - Theme Reactive */}
+                      <motion.div
+                        className="absolute inset-0 opacity-20"
+                        style={{
+                          background: `radial-gradient(circle at 70% 30%, ${milestone.color}40 0%, transparent 50%)`,
+                        }}
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 180, 360],
+                        }}
+                        transition={{
+                          duration: 10,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      />
+
+                      <div className="relative z-10 text-center space-y-6">
+                        {/* Icon */}
+                        <motion.div
+                          className="flex justify-center"
+                          animate={{
+                            rotate: [0, 5, -5, 0],
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{
+                            duration: 6,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: index * 0.5,
+                          }}
+                        >
+                          <div
+                            className="w-20 h-20 rounded-3xl flex items-center justify-center"
+                            style={{
+                              background: `linear-gradient(135deg, ${milestone.color}80, ${milestone.color}60)`,
+                              boxShadow: `0 8px 32px ${milestone.color}40`,
+                            }}
+                          >
+                            <milestone.icon
+                              className="w-10 h-10 text-white"
+                              strokeWidth={1.5}
+                            />
+                          </div>
+                        </motion.div>
+
+                        {/* Content */}
+                        <div className="space-y-3">
+                          <h3
+                            className="text-sm font-bold uppercase tracking-wider"
+                            style={{
+                              color: milestone.color,
+                              fontFamily:
+                                '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            }}
+                          >
+                            {milestone.title}
+                          </h3>
+                          <p
+                            className="text-2xl font-bold"
+                            style={{
+                              color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                              fontFamily:
+                                '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                            }}
+                          >
+                            {milestone.value}
+                          </p>
+                          <p
+                            className="text-base font-medium"
+                            style={{
+                              color: milestone.color,
+                              fontFamily:
+                                '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            }}
+                          >
+                            {milestone.subtitle}
+                          </p>
+                          <p
+                            className="text-sm leading-relaxed"
+                            style={{
+                              color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                              fontFamily:
+                                '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                              lineHeight: "1.6",
+                            }}
+                          >
+                            {milestone.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        );
+
+      case "projects":
+        return (
+          <div className="space-y-8 w-full">
+            {/* Header */}
+            <div className="space-y-2">
+              <h2
+                className="text-3xl font-light tracking-tight sf-pro-display"
+                style={{
+                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  fontFamily:
+                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                  fontWeight: 300,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Featured Projects
+              </h2>
+              <p
+                className="text-lg sf-pro-text"
+                style={{
+                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
+                  fontFamily:
+                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                A showcase of my recent work and technical expertise
+              </p>
+            </div>
+
+            {/* Projects Showcase */}
+            <div className="space-y-12">
+              {[
+                {
+                  title: "Margin Detection & Personality Prediction",
+                  subtitle: "Computer Vision meets Psychology",
+                  description:
+                    "What if handwriting could reveal personality? This project analyzes margin patterns in handwritten text to predict personality traits. Built with computer vision and machine learning.",
+                  technologies: ["Python", "EasyOCR", "OpenCV", "ML"],
+                  link: "https://github.com/Shrey-Parekh/Margin-Detection/",
+                  accent: "#8B5CF6",
+                  pattern: "psychology",
+                },
+                {
+                  title: "Interactive Quiz Platform",
+                  subtitle: "Learning made engaging",
+                  description:
+                    "A full-stack quiz application that makes learning fun. Features real-time scoring, user progress tracking, and an admin dashboard for quiz management.",
+                  technologies: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Node.js",
+                    "MySQL",
+                  ],
+                  link: "https://github.com/Shrey-Parekh/Quiz-App",
+                  accent: "#3B82F6",
+                  pattern: "web",
+                },
+                {
+                  title: "IET Committee Portal",
+                  subtitle: "Collaboration reimagined",
+                  description:
+                    "A modern committee management platform used by multiple organizations. Real-time collaboration, event management, and member coordination all in one place.",
+                  technologies: [
+                    "React",
+                    "TypeScript",
+                    "Supabase",
+                    "Tailwind",
+                    "Vite",
+                  ],
+                  link: "https://iet-portal.vercel.app/",
+                  accent: "#10B981",
+                  pattern: "portal",
+                  isLive: true,
+                },
+                {
+                  title: "AI Voice Assistant",
+                  subtitle: "Your personal AI companion",
+                  description:
+                    "A voice-powered assistant that understands and responds naturally. Powered by Google's Gemini Flash 2.0 for intelligent conversations and task automation.",
+                  technologies: [
+                    "Python",
+                    "Speech Recognition",
+                    "Gemini 2.0",
+                    "gTTS",
+                  ],
+                  link: "https://github.com/Shrey-Parekh/voiceassistant",
+                  accent: "#F59E0B",
+                  pattern: "voice",
+                },
+                {
+                  title: "Diet Recommendation Engine",
+                  subtitle: "Personalized nutrition intelligence",
+                  description:
+                    "Smart nutrition recommendations tailored to individual health goals and dietary preferences. Uses machine learning to analyze patterns and suggest optimal meal plans.",
+                  technologies: [
+                    "Python",
+                    "Streamlit",
+                    "Scikit-learn",
+                    "Data Science",
+                  ],
+                  link: "https://github.com/Shrey-Parekh/Diet_Recommendation",
+                  accent: "#EF4444",
+                  pattern: "health",
+                },
+                {
+                  title: "AI Tutor System",
+                  subtitle: "Intelligent learning companion",
+                  description:
+                    "An AI-powered tutoring platform that processes PDFs and provides contextual learning assistance. Makes complex topics accessible through personalized explanations.",
+                  technologies: [
+                    "Python",
+                    "Ollama",
+                    "Streamlit",
+                    "PyPDF2",
+                    "LangChain",
+                  ],
+                  link: "https://github.com/Shrey-Parekh/AI-TUTOR",
+                  accent: "#14B8A6",
+                  pattern: "education",
+                },
+              ].map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? -60 : 60,
+                    rotateY: index % 2 === 0 ? -5 : 5,
+                  }}
+                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: index * 0.2,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
+                  className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-12 ${
+                    index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                  }`}
+                >
+                  {/* Project Visual */}
+                  <motion.div
+                    className="flex-shrink-0 w-full lg:w-80 xl:w-96"
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.6, ease: [0.23, 1, 0.32, 1] },
+                    }}
+                  >
+                    <div
+                      className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group"
+                      style={{
+                        background: isDarkMode
+                          ? `linear-gradient(135deg, ${project.accent}20 0%, ${project.accent}05 100%)`
+                          : `linear-gradient(135deg, ${project.accent}15 0%, ${project.accent}05 100%)`,
+                        border: `2px solid ${project.accent}30`,
+                        boxShadow: `0 20px 40px ${project.accent}20, 0 0 0 1px ${project.accent}10`,
+                      }}
+                      onClick={() => window.open(project.link, "_blank")}
+                    >
+                      {/* Animated Pattern Background */}
+                      <div className="absolute inset-0 opacity-30">
+                        {project.pattern === "psychology" && (
+                          <motion.div
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage: `radial-gradient(circle at 20% 30%, ${project.accent}40 2px, transparent 2px),
+                                               radial-gradient(circle at 80% 70%, ${project.accent}30 1px, transparent 1px),
+                                               radial-gradient(circle at 40% 80%, ${project.accent}20 1.5px, transparent 1.5px)`,
+                              backgroundSize: "60px 60px, 40px 40px, 80px 80px",
+                            }}
+                            animate={{
+                              backgroundPosition: ["0% 0%", "100% 100%"],
+                            }}
+                            transition={{
+                              duration: 20,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                          />
+                        )}
+                        {project.pattern === "web" && (
+                          <motion.div
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage: `linear-gradient(45deg, ${project.accent}20 25%, transparent 25%),
+                                               linear-gradient(-45deg, ${project.accent}20 25%, transparent 25%),
+                                               linear-gradient(45deg, transparent 75%, ${project.accent}15 75%),
+                                               linear-gradient(-45deg, transparent 75%, ${project.accent}15 75%)`,
+                              backgroundSize: "20px 20px",
+                            }}
+                            animate={{
+                              backgroundPosition: ["0px 0px", "20px 20px"],
+                            }}
+                            transition={{
+                              duration: 8,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                          />
+                        )}
+                        {project.pattern === "portal" && (
+                          <motion.div className="absolute inset-0 flex items-center justify-center">
+                            {[...Array(6)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute w-16 h-16 border-2 rounded-full"
+                                style={{ borderColor: `${project.accent}40` }}
+                                animate={{
+                                  scale: [1, 2, 1],
+                                  opacity: [0.8, 0, 0.8],
+                                }}
+                                transition={{
+                                  duration: 3,
+                                  repeat: Infinity,
+                                  delay: i * 0.5,
+                                  ease: "easeInOut",
+                                }}
+                              />
+                            ))}
+                          </motion.div>
+                        )}
+                        {project.pattern === "voice" && (
+                          <motion.div className="absolute inset-0 flex items-center justify-center">
+                            {[...Array(4)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute w-2 rounded-full"
+                                style={{
+                                  backgroundColor: project.accent,
+                                  left: `${30 + i * 15}%`,
+                                  height: "20%",
+                                }}
+                                animate={{
+                                  scaleY: [0.5, 2, 0.8, 1.5, 0.5],
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  delay: i * 0.2,
+                                  ease: "easeInOut",
+                                }}
+                              />
+                            ))}
+                          </motion.div>
+                        )}
+                        {project.pattern === "health" && (
+                          <motion.div
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage: `conic-gradient(from 0deg at 50% 50%, ${project.accent}30 0deg, transparent 60deg, ${project.accent}20 120deg, transparent 180deg, ${project.accent}25 240deg, transparent 300deg)`,
+                            }}
+                            animate={{
+                              rotate: [0, 360],
+                            }}
+                            transition={{
+                              duration: 15,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                          />
+                        )}
+                        {project.pattern === "education" && (
+                          <motion.div className="absolute inset-0">
+                            {[...Array(12)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute w-1 h-1 rounded-full"
+                                style={{
+                                  backgroundColor: project.accent,
+                                  left: `${Math.random() * 100}%`,
+                                  top: `${Math.random() * 100}%`,
+                                }}
+                                animate={{
+                                  y: [-20, 20, -20],
+                                  opacity: [0.3, 1, 0.3],
+                                }}
+                                transition={{
+                                  duration: 3 + Math.random() * 2,
+                                  repeat: Infinity,
+                                  delay: i * 0.3,
+                                  ease: "easeInOut",
+                                }}
+                              />
+                            ))}
+                          </motion.div>
+                        )}
+                      </div>
+
+                      {/* Project Icon/Symbol */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          className="w-20 h-20 rounded-2xl flex items-center justify-center"
+                          style={{
+                            background: `linear-gradient(135deg, ${project.accent}80 0%, ${project.accent}60 100%)`,
+                            boxShadow: `0 8px 32px ${project.accent}40`,
+                          }}
+                          whileHover={{
+                            scale: 1.1,
+                            rotate: 5,
+                            transition: { duration: 0.3 },
+                          }}
+                        >
+                          <Code
+                            className="w-10 h-10 text-white"
+                            strokeWidth={1.5}
+                          />
+                        </motion.div>
+                      </div>
+
+                      {/* Live Badge */}
+                      {project.isLive && (
+                        <motion.div
+                          className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-2"
+                          style={{
+                            background: isDarkMode
+                              ? "rgba(34, 197, 94, 0.9)"
+                              : "#10B981",
+                            color: "white",
+                            backdropFilter: "blur(10px)",
+                          }}
+                          animate={{
+                            scale: [1, 1.05, 1],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        >
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                          <span>Live</span>
+                        </motion.div>
+                      )}
+
+                      {/* Hover Overlay */}
+                      <motion.div
+                        className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center"
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          whileHover={{ scale: 1, opacity: 1 }}
+                          className="flex items-center space-x-2 text-white font-medium"
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                          <span>View Project</span>
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Project Content */}
+                  <div className="flex-1 space-y-6 text-center lg:text-left">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.2 + 0.3,
+                        ease: [0.23, 1, 0.32, 1],
+                      }}
+                    >
+                      <h3
+                        className="text-3xl lg:text-4xl font-bold mb-2"
+                        style={{
+                          color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                          fontFamily:
+                            '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                          letterSpacing: "-0.02em",
+                          lineHeight: "1.2",
+                        }}
+                      >
+                        {project.title}
+                      </h3>
+                      <p
+                        className="text-lg font-medium mb-4"
+                        style={{
+                          color: project.accent,
+                          fontFamily:
+                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                        }}
+                      >
+                        {project.subtitle}
+                      </p>
+                    </motion.div>
+
+                    <motion.p
+                      className="text-lg leading-relaxed"
+                      style={{
+                        color: isDarkMode ? "#D1D5DB" : "#6B7280",
+                        fontFamily:
+                          '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                        lineHeight: "1.7",
+                      }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.2 + 0.5,
+                        ease: [0.23, 1, 0.32, 1],
+                      }}
+                    >
+                      {project.description}
+                    </motion.p>
+
+                    <motion.div
+                      className="flex flex-wrap gap-3 justify-center lg:justify-start"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.2 + 0.7,
+                        ease: [0.23, 1, 0.32, 1],
+                      }}
+                    >
+                      {project.technologies.map((tech, techIndex) => (
+                        <motion.span
+                          key={techIndex}
+                          className="px-4 py-2 rounded-full text-sm font-medium"
+                          style={{
+                            background: isDarkMode
+                              ? `${project.accent}20`
+                              : `${project.accent}15`,
+                            color: project.accent,
+                            border: `1px solid ${project.accent}40`,
+                            fontFamily:
+                              '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          }}
+                          whileHover={{
+                            scale: 1.05,
+                            y: -2,
+                            backgroundColor: project.accent,
+                            color: "white",
+                            transition: { duration: 0.2 },
+                          }}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.2 + 0.8 + techIndex * 0.1,
+                            ease: [0.23, 1, 0.32, 1],
+                          }}
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "skills":
+        return (
+          <div className="w-full space-y-8">
+            <div className="space-y-2">
+              <h2
+                className="text-3xl font-light tracking-tight"
+                style={{
+                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  fontFamily:
+                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Technical Skills
+              </h2>
+              <p
+                className="text-lg"
+                style={{
+                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
+                  fontFamily:
+                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Technologies and tools I work with
+              </p>
+            </div>
+            <div className="space-y-6">
+              {[
+                {
+                  category: "Programming Languages",
+                  skills: ["Python", "JavaScript", "Java", "C/C++", "Rust"],
+                  color: "#3B82F6",
+                },
+                {
+                  category: "Web Technologies",
+                  skills: ["React", "TypeScript", "HTML", "CSS", "Node.js"],
+                  color: "#10B981",
+                },
+                {
+                  category: "AI/ML & Data",
+                  skills: ["Machine Learning", "Data Analytics", "Streamlit"],
+                  color: "#8B5CF6",
+                },
+                {
+                  category: "Tools & Databases",
+                  skills: ["Git", "MySQL", "Supabase"],
+                  color: "#F59E0B",
+                },
+              ].map((section, index) => (
+                <div
+                  key={index}
+                  className="p-6 rounded-2xl"
+                  style={{
+                    background: isDarkMode
+                      ? `${section.color}15`
+                      : `${section.color}10`,
+                    border: `1px solid ${section.color}30`,
+                  }}
+                >
+                  <h3
+                    className="text-xl font-semibold mb-4"
+                    style={{ color: section.color }}
+                  >
+                    {section.category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {section.skills.map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="px-3 py-1 rounded-full text-sm font-medium"
+                        style={{
+                          background: isDarkMode
+                            ? "rgba(255, 255, 255, 0.1)"
+                            : "rgba(255, 255, 255, 0.8)",
+                          color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "contact":
+        return (
+          <div className="w-full space-y-8">
+            <div className="space-y-2 text-center">
+              <h2
+                className="text-3xl font-light tracking-tight"
+                style={{
+                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  fontFamily:
+                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Get In Touch
+              </h2>
+              <p
+                className="text-lg"
+                style={{
+                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
+                  fontFamily:
+                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Let's connect and build something amazing together
+              </p>
+            </div>
+            <div className="space-y-6">
+              <div
+                className="p-6 rounded-2xl text-center"
+                style={{
+                  background: isDarkMode
+                    ? "rgba(59, 130, 246, 0.15)"
+                    : "rgba(59, 130, 246, 0.1)",
+                  border: "1px solid rgba(59, 130, 246, 0.3)",
+                }}
+              >
+                <h3
+                  className="text-xl font-semibold mb-2"
+                  style={{ color: "#3B82F6" }}
+                >
+                  Email
+                </h3>
+                <p
+                  className="text-lg"
+                  style={{ color: isDarkMode ? "#FFFFFF" : "#1F2937" }}
+                >
+                  shreyparekh3@gmail.com
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  className="p-4 rounded-xl text-center"
+                  style={{
+                    background: isDarkMode
+                      ? "rgba(16, 185, 129, 0.15)"
+                      : "rgba(16, 185, 129, 0.1)",
+                    border: "1px solid rgba(16, 185, 129, 0.3)",
+                  }}
+                >
+                  <h4
+                    className="font-semibold mb-1"
+                    style={{ color: "#10B981" }}
+                  >
+                    LinkedIn
+                  </h4>
+                  <p
+                    className="text-sm"
+                    style={{ color: isDarkMode ? "#D1D5DB" : "#4B5563" }}
+                  >
+                    Professional Network
+                  </p>
+                </div>
+                <div
+                  className="p-4 rounded-xl text-center"
+                  style={{
+                    background: isDarkMode
+                      ? "rgba(139, 92, 246, 0.15)"
+                      : "rgba(139, 92, 246, 0.1)",
+                    border: "1px solid rgba(139, 92, 246, 0.3)",
+                  }}
+                >
+                  <h4
+                    className="font-semibold mb-1"
+                    style={{ color: "#8B5CF6" }}
+                  >
+                    GitHub
+                  </h4>
+                  <p
+                    className="text-sm"
+                    style={{ color: isDarkMode ? "#D1D5DB" : "#4B5563" }}
+                  >
+                    Code Repository
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "blog":
+        return (
+          <div className="w-full space-y-8">
+            <div className="space-y-2">
+              <h2
+                className="text-3xl font-light tracking-tight"
+                style={{
+                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  fontFamily:
+                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Blog & Articles
+              </h2>
+              <p
+                className="text-lg"
+                style={{
+                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
+                  fontFamily:
+                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                }}
+              >
+                Thoughts on technology and development
+              </p>
+            </div>
+            <div
+              className="text-center py-16"
+              style={{
+                background: isDarkMode
+                  ? "rgba(251, 191, 36, 0.1)"
+                  : "rgba(251, 191, 36, 0.05)",
+                border: "1px dashed rgba(251, 191, 36, 0.3)",
+                borderRadius: "16px",
+              }}
+            >
+              <h3
+                className="text-xl font-semibold mb-2"
+                style={{ color: "#F59E0B" }}
+              >
+                Coming Soon
+              </h3>
+              <p style={{ color: isDarkMode ? "#D1D5DB" : "#4B5563" }}>
+                Blog posts and technical articles are in development
+              </p>
+            </div>
           </div>
         );
 
       default:
-        return <div>Window content not found</div>;
+        return (
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <h3
+                className="text-xl font-semibold"
+                style={{ color: isDarkMode ? "#FFFFFF" : "#1F2937" }}
+              >
+                Welcome
+              </h3>
+              <p style={{ color: isDarkMode ? "#9CA3AF" : "#6B7280" }}>
+                Select a section from the dock to get started
+              </p>
+            </div>
+          </div>
+        );
     }
   };
 
@@ -793,7 +1721,9 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                   className="flex-1 overflow-auto"
                 >
                   <motion.div
-                    className={window.isMaximized ? "p-8 lg:p-12 xl:p-16" : "p-6"}
+                    className={
+                      window.isMaximized ? "p-8 lg:p-12 xl:p-16" : "p-6"
+                    }
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{

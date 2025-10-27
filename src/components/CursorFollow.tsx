@@ -1,270 +1,150 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useTheme } from '../context/ThemeContext'
 
 interface Position {
   x: number
   y: number
-  timestamp: number
-}
-
-interface TrailParticle extends Position {
-  id: string
-  velocity: number
 }
 
 export const CursorFollow: React.FC = () => {
+  const { isDarkMode } = useTheme()
+  const [mousePosition, setMousePosition] = useState<Position>({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
-  const [isHovering, setIsHovering] = useState(false)
-  const [trail, setTrail] = useState<TrailParticle[]>([])
-  
-  // Use motion values for smoother performance
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  
-  // Spring physics for smooth following
-  const springX = useSpring(mouseX, { damping: 25, stiffness: 400, mass: 0.2 })
-  const springY = useSpring(mouseY, { damping: 25, stiffness: 400, mass: 0.2 })
-
-  const updateTrail = useCallback((newPosition: Position, velocity: number) => {
-    const newParticle: TrailParticle = {
-      ...newPosition,
-      id: `${Date.now()}-${Math.random()}`,
-      velocity
-    }
-    
-    setTrail(prevTrail => {
-      const updatedTrail = [newParticle, ...prevTrail.slice(0, 11)]
-      return updatedTrail
-    })
-  }, [])
+  const [trail, setTrail] = useState<Position[]>([])
 
   useEffect(() => {
-    let lastPosition = { x: 0, y: 0, timestamp: Date.now() }
-    let animationFrame: number
-
     const updateMousePosition = (e: MouseEvent) => {
-      const currentTime = Date.now()
-      const newPosition = { 
-        x: e.clientX, 
-        y: e.clientY, 
-        timestamp: currentTime 
-      }
-      
-      // Calculate velocity for trail intensity
-      const deltaTime = currentTime - lastPosition.timestamp
-      const deltaX = newPosition.x - lastPosition.x
-      const deltaY = newPosition.y - lastPosition.y
-      const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / Math.max(deltaTime, 1)
-      
-      mouseX.set(newPosition.x)
-      mouseY.set(newPosition.y)
+      const newPosition = { x: e.clientX, y: e.clientY }
+      setMousePosition(newPosition)
       setIsVisible(true)
       
-      // Only create trail particles if moving fast enough
-      if (velocity > 0.5) {
-        updateTrail(newPosition, velocity)
-      }
-      
-      lastPosition = newPosition
+      // Update trail with theme-based particles
+      setTrail(prevTrail => {
+        const newTrail = [newPosition, ...prevTrail.slice(0, 8)]
+        return newTrail
+      })
     }
 
-    const handleMouseEnter = () => setIsHovering(true)
     const handleMouseLeave = () => {
-      setIsHovering(false)
       setIsVisible(false)
       setTrail([])
     }
 
-    // Detect interactive elements
-    const updateHoverState = () => {
-      const interactiveElements = document.querySelectorAll(
-        'button, a, [role="button"], .dock-item, .window-title-bar, input, textarea, select'
-      )
-      
-      interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', handleMouseEnter)
-        element.addEventListener('mouseleave', () => setIsHovering(false))
-      })
-    }
-
-    // Clean up trail particles
-    const cleanupTrail = () => {
-      const currentTime = Date.now()
-      setTrail(prevTrail => 
-        prevTrail.filter(particle => currentTime - particle.timestamp < 800)
-      )
-      animationFrame = requestAnimationFrame(cleanupTrail)
-    }
-
     window.addEventListener('mousemove', updateMousePosition)
     document.addEventListener('mouseleave', handleMouseLeave)
-    updateHoverState()
-    cleanupTrail()
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition)
       document.removeEventListener('mouseleave', handleMouseLeave)
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
-      }
     }
-  }, [mouseX, mouseY, updateTrail])
+  }, [])
 
   if (!isVisible) return null
 
+  // Theme-aware colors for better contrast
+  const themeColors = isDarkMode 
+    ? ['#3B82F6', '#8B5CF6', '#10B981'] // Bright colors for dark mode
+    : ['#1E40AF', '#7C3AED', '#059669'] // Darker colors for light mode
+
   return (
     <>
-      {/* Enhanced Cursor Trail */}
-      {trail.map((particle) => {
-        const age = Date.now() - particle.timestamp
-        const maxAge = 800
-        const progress = Math.min(age / maxAge, 1)
-        const opacity = (1 - progress) * 0.8
-        const scale = (1 - progress) * (0.8 + particle.velocity * 0.02)
+      {/* Enhanced Themed Cursor Trail */}
+      {trail.map((position, index) => {
+        const colorIndex = index % themeColors.length
+        const color = themeColors[colorIndex]
+        const size = 10 - index * 0.8 // Larger trail particles
+        const opacity = (8 - index) / 8 * (isDarkMode ? 0.8 : 0.6)
         
         return (
           <motion.div
-            key={particle.id}
+            key={index}
             className="fixed pointer-events-none z-40"
             style={{
-              left: particle.x - 4,
-              top: particle.y - 4,
-              width: 8,
-              height: 8,
+              left: position.x - size / 2,
+              top: position.y - size / 2,
+              width: size,
+              height: size,
             }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ 
               opacity: opacity,
-              scale: scale,
+              scale: 1 - index * 0.1,
             }}
             transition={{
-              duration: 0.1,
+              duration: 0.4,
               ease: "easeOut"
             }}
           >
             <div
               className="w-full h-full rounded-full"
               style={{
-                background: `radial-gradient(circle, rgba(0, 0, 0, ${opacity * 0.6}) 0%, rgba(0, 0, 0, ${opacity * 0.2}) 70%, transparent 100%)`,
-                filter: 'blur(0.5px)',
-                boxShadow: `0 0 ${4 + particle.velocity * 0.5}px rgba(0, 0, 0, ${opacity * 0.3})`,
+                background: isDarkMode
+                  ? `radial-gradient(circle, ${color}CC 0%, ${color}66 60%, transparent 100%)`
+                  : `radial-gradient(circle, ${color}AA 0%, ${color}44 60%, transparent 100%)`,
+                filter: 'blur(1px)',
+                boxShadow: isDarkMode
+                  ? `0 0 ${12 - index}px ${color}88`
+                  : `0 0 ${8 - index}px ${color}66`,
               }}
             />
           </motion.div>
         )
       })}
       
-      {/* Main macOS Black Cursor */}
+      {/* Theme-Aware macOS Cursor */}
       <motion.div
         className="fixed pointer-events-none z-50"
-        style={{
-          x: springX,
-          y: springY,
+        animate={{
+          x: mousePosition.x,
+          y: mousePosition.y,
+        }}
+        transition={{
+          type: "spring",
+          damping: 25,
+          stiffness: 400,
+          mass: 0.3,
         }}
       >
-        {/* Cursor Glow Effect */}
-        <motion.div
-          className="absolute"
-          style={{
-            left: -8,
-            top: -8,
-            width: 32,
-            height: 32,
-          }}
-          animate={{
-            scale: isHovering ? 1.3 : 1,
-            opacity: isHovering ? 0.8 : 0.4,
-          }}
-          transition={{
-            duration: 0.2,
-            ease: "easeOut"
-          }}
-        >
-          <div
-            className="w-full h-full rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, transparent 70%)',
-              filter: 'blur(4px)',
-            }}
-          />
-        </motion.div>
-
-        {/* macOS Black Cursor Shape */}
-        <motion.svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
+        {/* macOS Cursor Shape - Larger and Theme-Aware */}
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
           fill="none"
           style={{
-            transform: 'translate(-1px, -1px)',
-            filter: 'drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.1))',
-          }}
-          animate={{
-            scale: isHovering ? 1.2 : 1,
-          }}
-          transition={{
-            duration: 0.2,
-            ease: "easeOut"
+            transform: 'translate(-2px, -2px)',
+            filter: isDarkMode
+              ? 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.2))'
+              : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.1))',
           }}
         >
-          {/* Outer Shadow */}
+          {/* Enhanced Cursor Shadow */}
           <path
-            d="M2.5 2.5L17.5 9.5L11 10.8L9.5 17.5L2.5 2.5Z"
-            fill="rgba(0, 0, 0, 0.15)"
-            transform="translate(0.5, 0.5)"
+            d="M4 4L24 13.5L15.5 15.5L13.5 24L4 4Z"
+            fill={isDarkMode ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"}
+            transform="translate(1, 1)"
           />
-          
-          {/* Main Black Cursor Body */}
+          {/* Main Cursor Body */}
           <path
-            d="M2 2L17 9L10.5 10.3L9 17L2 2Z"
-            fill="#1a1a1a"
-            stroke="rgba(0, 0, 0, 0.8)"
-            strokeWidth="0.3"
+            d="M3.5 3.5L23.5 13L15 15L13 23.5L3.5 3.5Z"
+            fill={isDarkMode ? "#FFFFFF" : "#FFFFFF"}
+            stroke={isDarkMode ? "rgba(59, 130, 246, 0.3)" : "rgba(0, 0, 0, 0.3)"}
+            strokeWidth="0.8"
           />
-          
           {/* Inner Highlight */}
           <path
-            d="M3 3L15.5 8.5L10 9.5L8.8 15.5L3 3Z"
-            fill="rgba(255, 255, 255, 0.1)"
+            d="M5 5L21.5 12.5L14.5 14L12.5 21.5L5 5Z"
+            fill={isDarkMode ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)"}
           />
-          
-          {/* Edge Highlight */}
+          {/* Theme-aware Edge Accent */}
           <path
-            d="M2.5 2.5L16.5 9L10.2 10.1L9 16.5L2.5 2.5Z"
+            d="M4 4L22.5 12.8L14.8 14.2L12.8 22.5L4 4Z"
             fill="none"
-            stroke="rgba(255, 255, 255, 0.2)"
-            strokeWidth="0.2"
+            stroke={isDarkMode ? "rgba(59, 130, 246, 0.4)" : "rgba(30, 64, 175, 0.2)"}
+            strokeWidth="0.3"
           />
-        </motion.svg>
-
-        {/* Interactive Hover Ring */}
-        {isHovering && (
-          <motion.div
-            className="absolute"
-            style={{
-              left: -6,
-              top: -6,
-              width: 32,
-              height: 32,
-            }}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{
-              duration: 0.2,
-              ease: "easeOut"
-            }}
-          >
-            <div
-              className="w-full h-full rounded-full border"
-              style={{
-                borderColor: 'rgba(0, 0, 0, 0.3)',
-                borderWidth: '1px',
-                background: 'radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%)',
-              }}
-            />
-          </motion.div>
-        )}
+        </svg>
       </motion.div>
     </>
   )

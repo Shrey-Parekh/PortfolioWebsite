@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Sun, Moon, Wifi, Battery } from 'lucide-react'
+import { Sun, Moon, Wifi, Battery, User } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 
 const MenuBar: React.FC = () => {
@@ -45,16 +45,30 @@ const MenuBar: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             className="flex items-center space-x-1 sm:space-x-2 cursor-pointer"
           >
-            <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm" style={{ 
-              background: 'linear-gradient(135deg, #007AFF 0%, #5856D6 100%)',
-              boxShadow: '0 2px 8px rgba(0, 122, 255, 0.4)'
-            }} />
+            {/* Special Icon for Shrey */}
+            <motion.div
+              className="w-4 h-4 rounded-full flex items-center justify-center"
+              style={{ 
+                background: 'linear-gradient(135deg, #007AFF 0%, #5856D6 100%)',
+                boxShadow: '0 2px 8px rgba(0, 122, 255, 0.4)'
+              }}
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              <User className="w-2.5 h-2.5 text-white" strokeWidth={2.5} />
+            </motion.div>
             <span className="text-xs sm:text-sm font-medium text-white hidden sm:block" style={{
               fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
               fontWeight: 500,
               textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)'
             }}>
-              Portfolio
+              Shrey Parekh
             </span>
           </motion.div>
         </div>

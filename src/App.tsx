@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Dock from './components/Dock'
 import MenuBar from './components/MenuBar'
 import WindowManager from './components/WindowManager'
-import CursorFollow from './components/CursorFollow'
+
 
 // Pages
 import Home from './pages/Home'
@@ -321,8 +321,7 @@ function App() {
                     onOpenWindow={openWindow}
                   />
                   
-                  {/* Cursor Follow Effect */}
-                  <CursorFollow />
+
                 </Router>
               </div>
             </ThemeProvider>
