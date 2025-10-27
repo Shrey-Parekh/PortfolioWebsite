@@ -7,7 +7,6 @@ import {
   Maximize2,
   Briefcase,
   Code,
-  MessageSquare,
   Mail,
   Linkedin,
   Github,
@@ -235,12 +234,7 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                             '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
                           letterSpacing: "-0.04em",
                           lineHeight: "0.9",
-                          background: isDarkMode
-                            ? "linear-gradient(135deg, #FFFFFF 0%, #E5E7EB 50%, #9CA3AF 100%)"
-                            : "linear-gradient(135deg, #1F2937 0%, #374151 50%, #6B7280 100%)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          backgroundClip: "text",
+                          color: isDarkMode ? "#FFFFFF" : "#1F2937",
                         }}
                         whileHover={{
                           scale: 1.02,
@@ -1023,184 +1017,780 @@ const WindowManager: React.FC<WindowManagerProps> = ({
 
       case "skills":
         return (
-          <div className="w-full space-y-8">
-            <div className="space-y-2">
-              <h2
-                className="text-3xl font-light tracking-tight"
-                style={{
-                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
-                  fontFamily:
-                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
-                }}
+          <div className="w-full space-y-16">
+            {/* Hero Section */}
+            <div className="text-center space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                className="space-y-4"
               >
-                Technical Skills
-              </h2>
-              <p
-                className="text-lg"
-                style={{
-                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
-                  fontFamily:
-                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
-                }}
-              >
-                Technologies and tools I work with
-              </p>
-            </div>
-            <div className="space-y-6">
-              {[
-                {
-                  category: "Programming Languages",
-                  skills: ["Python", "JavaScript", "Java", "C/C++", "Rust"],
-                  color: "#3B82F6",
-                },
-                {
-                  category: "Web Technologies",
-                  skills: ["React", "TypeScript", "HTML", "CSS", "Node.js"],
-                  color: "#10B981",
-                },
-                {
-                  category: "AI/ML & Data",
-                  skills: ["Machine Learning", "Data Analytics", "Streamlit"],
-                  color: "#8B5CF6",
-                },
-                {
-                  category: "Tools & Databases",
-                  skills: ["Git", "MySQL", "Supabase"],
-                  color: "#F59E0B",
-                },
-              ].map((section, index) => (
-                <div
-                  key={index}
-                  className="p-6 rounded-2xl"
+                <h1
+                  className="text-4xl lg:text-5xl xl:text-6xl font-bold"
                   style={{
-                    background: isDarkMode
-                      ? `${section.color}15`
-                      : `${section.color}10`,
-                    border: `1px solid ${section.color}30`,
+                    fontFamily:
+                      '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    letterSpacing: "-0.03em",
+                    lineHeight: "1.1",
+                    color: isDarkMode ? "#FFFFFF" : "#1F2937",
                   }}
                 >
-                  <h3
-                    className="text-xl font-semibold mb-4"
-                    style={{ color: section.color }}
+                  My Tech Arsenal
+                </h1>
+                <p
+                  className="text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
+                  style={{
+                    color: isDarkMode ? "#D1D5DB" : "#4B5563",
+                    fontFamily:
+                      '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                    lineHeight: "1.6",
+                  }}
+                >
+                  The tools and technologies I use to bring ideas to life. From
+                  systems programming to AI development.
+                </p>
+              </motion.div>
+
+              {/* Floating Tech Elements */}
+              <div className="relative">
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 rounded-full"
+                    style={{
+                      background: isDarkMode
+                        ? `linear-gradient(45deg, #3B82F6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #8B5CF6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`
+                        : `linear-gradient(45deg, #FBBF24${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #F59E0B${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`,
+                      left: `${20 + Math.random() * 60}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      y: [0, -40, 0],
+                      opacity: [0.4, 1, 0.4],
+                      scale: [1, 1.5, 1],
+                    }}
+                    transition={{
+                      duration: 4 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: i * 0.5,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Skills Showcase */}
+            <div className="space-y-12">
+              {[
+                {
+                  category: "Languages I Speak",
+                  subtitle: "The core languages that power my projects",
+                  skills: [
+                    "Rust",
+                    "Python",
+                    "JavaScript",
+                    "Java",
+                    "C/C++",
+                    "HTML",
+                    "CSS",
+                  ],
+                  color: isDarkMode ? "#3B82F6" : "#1E40AF",
+                  accent: isDarkMode ? "#3B82F6" : "#FBBF24",
+                  icon: Code,
+                },
+                {
+                  category: "Tools I Use",
+                  subtitle: "Development tools and platforms I work with",
+                  skills: ["Git", "MySQL", "Supabase"],
+                  color: isDarkMode ? "#10B981" : "#059669",
+                  accent: isDarkMode ? "#10B981" : "#F59E0B",
+                  icon: Briefcase,
+                },
+                {
+                  category: "AI & Data",
+                  subtitle: "Machine learning and data analysis expertise",
+                  skills: ["Data Analytics", "AI/ML"],
+                  color: isDarkMode ? "#8B5CF6" : "#7C3AED",
+                  accent: isDarkMode ? "#8B5CF6" : "#EF4444",
+                  icon: Brain,
+                },
+              ].map((section, sectionIndex) => (
+                <motion.div
+                  key={section.category}
+                  initial={{ opacity: 0, y: 60, rotateX: -10 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.3 + sectionIndex * 0.2,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
+                  className="relative"
+                >
+                  <div
+                    className="rounded-3xl p-8 lg:p-12 relative overflow-hidden"
+                    style={{
+                      background: isDarkMode
+                        ? `linear-gradient(135deg, ${section.color}15 0%, ${section.color}05 100%)`
+                        : `linear-gradient(135deg, ${section.accent}15 0%, ${section.accent}05 100%)`,
+                      border: isDarkMode
+                        ? `2px solid ${section.color}30`
+                        : `2px solid ${section.accent}30`,
+                      boxShadow: isDarkMode
+                        ? `0 20px 60px ${section.color}20`
+                        : `0 20px 60px ${section.accent}15`,
+                    }}
                   >
-                    {section.category}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {section.skills.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-3 py-1 rounded-full text-sm font-medium"
-                        style={{
-                          background: isDarkMode
-                            ? "rgba(255, 255, 255, 0.1)"
-                            : "rgba(255, 255, 255, 0.8)",
-                          color: isDarkMode ? "#FFFFFF" : "#1F2937",
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    {/* Animated Background Pattern */}
+                    <motion.div
+                      className="absolute inset-0 opacity-20"
+                      style={{
+                        background: `radial-gradient(circle at 70% 30%, ${section.color}40 0%, transparent 50%)`,
+                      }}
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
+
+                    <div className="relative z-10">
+                      {/* Header */}
+                      <div className="flex items-center space-x-6 mb-8">
+                        <motion.div
+                          className="flex-shrink-0"
+                          animate={{
+                            rotate: [0, 5, -5, 0],
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{
+                            duration: 6,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: sectionIndex * 0.5,
+                          }}
+                        >
+                          <div
+                            className="w-16 h-16 lg:w-20 lg:h-20 rounded-3xl flex items-center justify-center"
+                            style={{
+                              background: `linear-gradient(135deg, ${section.color}80, ${section.color}60)`,
+                              boxShadow: `0 10px 40px ${section.color}40`,
+                            }}
+                          >
+                            <section.icon
+                              className="w-8 h-8 lg:w-10 lg:h-10 text-white"
+                              strokeWidth={1.5}
+                            />
+                          </div>
+                        </motion.div>
+
+                        <div className="flex-1">
+                          <h3
+                            className="text-2xl lg:text-3xl font-bold mb-2"
+                            style={{
+                              color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                              fontFamily:
+                                '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                              letterSpacing: "-0.02em",
+                            }}
+                          >
+                            {section.category}
+                          </h3>
+                          <p
+                            className="text-base lg:text-lg"
+                            style={{
+                              color: section.color,
+                              fontFamily:
+                                '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            }}
+                          >
+                            {section.subtitle}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Skills Grid */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {section.skills.map((skill, skillIndex) => (
+                          <motion.div
+                            key={skill}
+                            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{
+                              duration: 0.6,
+                              delay:
+                                0.5 + sectionIndex * 0.2 + skillIndex * 0.1,
+                              ease: [0.23, 1, 0.32, 1],
+                            }}
+                            whileHover={{
+                              scale: 1.05,
+                              y: -8,
+                              transition: {
+                                duration: 0.3,
+                                ease: [0.23, 1, 0.32, 1],
+                              },
+                            }}
+                            className="relative group cursor-pointer"
+                          >
+                            <div
+                              className="p-6 rounded-2xl text-center relative overflow-hidden"
+                              style={{
+                                background: isDarkMode
+                                  ? "rgba(255, 255, 255, 0.08)"
+                                  : "rgba(255, 255, 255, 0.8)",
+                                border: isDarkMode
+                                  ? `1px solid ${section.color}40`
+                                  : `1px solid ${section.accent}40`,
+                                backdropFilter: "blur(20px)",
+                              }}
+                            >
+                              {/* Hover Effect */}
+                              <motion.div
+                                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
+                                style={{
+                                  background: `linear-gradient(135deg, ${section.color}20 0%, ${section.color}10 100%)`,
+                                }}
+                                transition={{ duration: 0.3 }}
+                              />
+
+                              <div className="relative z-10">
+                                <p
+                                  className="font-semibold"
+                                  style={{
+                                    color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                                    fontFamily:
+                                      '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                                    fontSize: "16px",
+                                  }}
+                                >
+                                  {skill}
+                                </p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
+
+              {/* Learning Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 1.2,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="text-center"
+              >
+                <div
+                  className="inline-block p-8 rounded-3xl"
+                  style={{
+                    background: isDarkMode
+                      ? "linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%)"
+                      : "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
+                    border: isDarkMode
+                      ? "2px dashed rgba(251, 191, 36, 0.3)"
+                      : "2px dashed #FCD34D",
+                  }}
+                >
+                  <div className="flex items-center justify-center space-x-4 mb-4">
+                    <motion.div
+                      className="w-3 h-3 rounded-full"
+                      style={{
+                        backgroundColor: isDarkMode ? "#FCD34D" : "#F59E0B",
+                      }}
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.7, 1, 0.7],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    <h3
+                      className="text-xl font-bold"
+                      style={{
+                        color: isDarkMode ? "#FCD34D" : "#92400E",
+                        fontFamily:
+                          '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                      }}
+                    >
+                      Always Learning
+                    </h3>
+                  </div>
+                  <p
+                    className="text-base max-w-md"
+                    style={{
+                      color: isDarkMode ? "#A3A3A3" : "#78716C",
+                      fontFamily:
+                        '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    Currently exploring WebAssembly, Kubernetes, and GraphQL to
+                    expand my toolkit
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </div>
         );
 
       case "contact":
         return (
-          <div className="w-full space-y-8">
-            <div className="space-y-2 text-center">
-              <h2
-                className="text-3xl font-light tracking-tight"
-                style={{
-                  color: isDarkMode ? "#FFFFFF" : "#1F2937",
-                  fontFamily:
-                    '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
-                }}
+          <div className="w-full space-y-16">
+            {/* Hero Message */}
+            <div className="text-center space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                className="space-y-4"
               >
-                Get In Touch
-              </h2>
-              <p
-                className="text-lg"
-                style={{
-                  color: isDarkMode ? "#A1A1AA" : "#6B7280",
-                  fontFamily:
-                    '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
-                }}
-              >
-                Let's connect and build something amazing together
-              </p>
-            </div>
-            <div className="space-y-6">
-              <div
-                className="p-6 rounded-2xl text-center"
-                style={{
-                  background: isDarkMode
-                    ? "rgba(59, 130, 246, 0.15)"
-                    : "rgba(59, 130, 246, 0.1)",
-                  border: "1px solid rgba(59, 130, 246, 0.3)",
-                }}
-              >
-                <h3
-                  className="text-xl font-semibold mb-2"
-                  style={{ color: "#3B82F6" }}
+                <h1
+                  className="text-4xl lg:text-5xl xl:text-6xl font-bold"
+                  style={{
+                    fontFamily:
+                      '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    letterSpacing: "-0.03em",
+                    lineHeight: "1.1",
+                    color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  }}
                 >
-                  Email
-                </h3>
+                  Let's Build Something Amazing
+                </h1>
                 <p
-                  className="text-lg"
-                  style={{ color: isDarkMode ? "#FFFFFF" : "#1F2937" }}
+                  className="text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
+                  style={{
+                    color: isDarkMode ? "#D1D5DB" : "#4B5563",
+                    fontFamily:
+                      '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                    lineHeight: "1.6",
+                  }}
                 >
-                  shreyparekh3@gmail.com
+                  Got an idea? Want to collaborate? Or just want to chat about
+                  tech? I'm always excited to connect with fellow developers and
+                  innovators.
                 </p>
+              </motion.div>
+
+              {/* Floating Contact Elements */}
+              <div className="relative">
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 rounded-full"
+                    style={{
+                      background: isDarkMode
+                        ? `linear-gradient(45deg, #3B82F6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #8B5CF6${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`
+                        : `linear-gradient(45deg, #FBBF24${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)}, #F59E0B${Math.floor(
+                            Math.random() * 50 + 30
+                          ).toString(16)})`,
+                      left: `${20 + Math.random() * 60}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      y: [0, -30, 0],
+                      opacity: [0.4, 1, 0.4],
+                      scale: [1, 1.5, 1],
+                    }}
+                    transition={{
+                      duration: 3 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: i * 0.5,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div
-                  className="p-4 rounded-xl text-center"
-                  style={{
-                    background: isDarkMode
-                      ? "rgba(16, 185, 129, 0.15)"
-                      : "rgba(16, 185, 129, 0.1)",
-                    border: "1px solid rgba(16, 185, 129, 0.3)",
+            </div>
+
+            {/* Contact Methods */}
+            <div className="space-y-12">
+              {/* Primary Contact - Email */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.3,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="text-center"
+              >
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
                   }}
+                  className="inline-block cursor-pointer group"
+                  onClick={() =>
+                    window.open("mailto:shreyparekh3@gmail.com", "_blank")
+                  }
                 >
-                  <h4
-                    className="font-semibold mb-1"
-                    style={{ color: "#10B981" }}
+                  <div
+                    className="relative p-8 lg:p-12 rounded-3xl"
+                    style={{
+                      background: isDarkMode
+                        ? "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%)"
+                        : "linear-gradient(135deg, #EFF6FF 0%, #F3E8FF 100%)",
+                      border: isDarkMode
+                        ? "2px solid rgba(99, 102, 241, 0.3)"
+                        : "2px solid rgba(99, 102, 241, 0.2)",
+                      boxShadow: isDarkMode
+                        ? "0 20px 60px rgba(99, 102, 241, 0.2)"
+                        : "0 20px 60px rgba(99, 102, 241, 0.15)",
+                    }}
                   >
-                    LinkedIn
-                  </h4>
+                    {/* Animated Background Pattern */}
+                    <motion.div
+                      className="absolute inset-0 rounded-3xl opacity-30"
+                      style={{
+                        background: `radial-gradient(circle at 30% 70%, ${
+                          isDarkMode ? "#6366F1" : "#FBBF24"
+                        }40 0%, transparent 50%)`,
+                      }}
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
+
+                    <div className="relative z-10 space-y-6">
+                      {/* Email Icon */}
+                      <motion.div
+                        className="flex justify-center"
+                        animate={{
+                          y: [0, -10, 0],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <div
+                          className="w-20 h-20 lg:w-24 lg:h-24 rounded-3xl flex items-center justify-center"
+                          style={{
+                            background: isDarkMode
+                              ? "linear-gradient(135deg, #6366F1, #8B5CF6)"
+                              : "linear-gradient(135deg, #FBBF24, #F59E0B)",
+                            boxShadow: isDarkMode
+                              ? "0 10px 40px rgba(99, 102, 241, 0.4)"
+                              : "0 10px 40px rgba(251, 191, 36, 0.4)",
+                          }}
+                        >
+                          <Mail
+                            className="w-10 h-10 lg:w-12 lg:h-12 text-white"
+                            strokeWidth={1.5}
+                          />
+                        </div>
+                      </motion.div>
+
+                      {/* Content */}
+                      <div className="space-y-4">
+                        <h2
+                          className="text-2xl lg:text-3xl font-bold"
+                          style={{
+                            color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                            fontFamily:
+                              '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                          }}
+                        >
+                          Drop me a line
+                        </h2>
+                        <p
+                          className="text-lg lg:text-xl font-medium"
+                          style={{
+                            color: isDarkMode ? "#6366F1" : "#F59E0B",
+                            fontFamily:
+                              '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          }}
+                        >
+                          shreyparekh3@gmail.com
+                        </p>
+                        <p
+                          className="text-base max-w-md mx-auto"
+                          style={{
+                            color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                            fontFamily:
+                              '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            lineHeight: "1.6",
+                          }}
+                        >
+                          Whether it's a project idea, collaboration
+                          opportunity, or just a friendly hello
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Social Connections */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.6,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="space-y-8"
+              >
+                <div className="text-center">
+                  <h3
+                    className="text-2xl lg:text-3xl font-bold mb-4"
+                    style={{
+                      color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                      fontFamily:
+                        '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    }}
+                  >
+                    Find me around the web
+                  </h3>
                   <p
-                    className="text-sm"
-                    style={{ color: isDarkMode ? "#D1D5DB" : "#4B5563" }}
+                    className="text-lg"
+                    style={{
+                      color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                      fontFamily:
+                        '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                    }}
                   >
-                    Professional Network
+                    Let's connect on these platforms
                   </p>
                 </div>
-                <div
-                  className="p-4 rounded-xl text-center"
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                  {[
+                    {
+                      name: "LinkedIn",
+                      description: "Professional network",
+                      icon: Linkedin,
+                      url: "https://www.linkedin.com/in/shrey-parekh-599a44276/",
+                      color: isDarkMode ? "#0EA5E9" : "#0369A1",
+                      bgGradient: isDarkMode
+                        ? "linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%)"
+                        : "linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)",
+                    },
+                    {
+                      name: "GitHub",
+                      description: "Code & projects",
+                      icon: Github,
+                      url: "https://github.com/Shrey-Parekh",
+                      color: isDarkMode ? "#64748B" : "#334155",
+                      bgGradient: isDarkMode
+                        ? "linear-gradient(135deg, rgba(100, 116, 139, 0.15) 0%, rgba(71, 85, 105, 0.1) 100%)"
+                        : "linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)",
+                    },
+                  ].map((platform, index) => (
+                    <motion.div
+                      key={platform.name}
+                      initial={{ opacity: 0, y: 30, rotateY: -10 }}
+                      animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.8 + index * 0.2,
+                        ease: [0.23, 1, 0.32, 1],
+                      }}
+                      whileHover={{
+                        scale: 1.05,
+                        y: -8,
+                        rotateY: 5,
+                        transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                      }}
+                      className="relative group cursor-pointer"
+                      onClick={() => window.open(platform.url, "_blank")}
+                    >
+                      <div
+                        className="p-8 rounded-3xl relative overflow-hidden"
+                        style={{
+                          background: platform.bgGradient,
+                          border: `2px solid ${platform.color}30`,
+                          boxShadow: isDarkMode
+                            ? `0 15px 50px ${platform.color}20`
+                            : `0 15px 50px ${platform.color}15`,
+                        }}
+                      >
+                        {/* Animated Background */}
+                        <motion.div
+                          className="absolute inset-0 opacity-20"
+                          style={{
+                            background: `radial-gradient(circle at 70% 30%, ${platform.color}40 0%, transparent 50%)`,
+                          }}
+                          animate={{
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 90, 180, 270, 360],
+                          }}
+                          transition={{
+                            duration: 12,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        />
+
+                        <div className="relative z-10 text-center space-y-4">
+                          {/* Icon */}
+                          <motion.div
+                            className="flex justify-center"
+                            animate={{
+                              rotate: [0, 5, -5, 0],
+                            }}
+                            transition={{
+                              duration: 4,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: index * 0.5,
+                            }}
+                          >
+                            <div
+                              className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                              style={{
+                                background: `linear-gradient(135deg, ${platform.color}80, ${platform.color}60)`,
+                                boxShadow: `0 8px 32px ${platform.color}40`,
+                              }}
+                            >
+                              <platform.icon
+                                className="w-8 h-8 text-white"
+                                strokeWidth={1.5}
+                              />
+                            </div>
+                          </motion.div>
+
+                          {/* Content */}
+                          <div className="space-y-2">
+                            <h4
+                              className="text-xl font-bold"
+                              style={{
+                                color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                                fontFamily:
+                                  '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                              }}
+                            >
+                              {platform.name}
+                            </h4>
+                            <p
+                              className="text-sm"
+                              style={{
+                                color: platform.color,
+                                fontFamily:
+                                  '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                              }}
+                            >
+                              {platform.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Availability Status */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 1.2,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="text-center"
+              >
+                <motion.div
+                  className="inline-flex items-center space-x-4 px-8 py-6 rounded-3xl"
                   style={{
                     background: isDarkMode
-                      ? "rgba(139, 92, 246, 0.15)"
-                      : "rgba(139, 92, 246, 0.1)",
-                    border: "1px solid rgba(139, 92, 246, 0.3)",
+                      ? "linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%)"
+                      : "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)",
+                    border: isDarkMode
+                      ? "2px solid rgba(16, 185, 129, 0.3)"
+                      : "2px solid rgba(16, 185, 129, 0.2)",
+                    boxShadow: isDarkMode
+                      ? "0 15px 50px rgba(16, 185, 129, 0.2)"
+                      : "0 15px 50px rgba(16, 185, 129, 0.15)",
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
                   }}
                 >
-                  <h4
-                    className="font-semibold mb-1"
-                    style={{ color: "#8B5CF6" }}
-                  >
-                    GitHub
-                  </h4>
-                  <p
-                    className="text-sm"
-                    style={{ color: isDarkMode ? "#D1D5DB" : "#4B5563" }}
-                  >
-                    Code Repository
-                  </p>
-                </div>
-              </div>
+                  <motion.div
+                    className="w-4 h-4 rounded-full"
+                    style={{
+                      background: isDarkMode
+                        ? "linear-gradient(135deg, #10B981, #059669)"
+                        : "linear-gradient(135deg, #34D399, #10B981)",
+                    }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      boxShadow: [
+                        "0 0 0 0 rgba(16, 185, 129, 0.4)",
+                        "0 0 0 8px rgba(16, 185, 129, 0)",
+                        "0 0 0 0 rgba(16, 185, 129, 0)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <div className="text-left">
+                    <p
+                      className="text-lg font-bold"
+                      style={{
+                        color: isDarkMode ? "#10B981" : "#059669",
+                        fontFamily:
+                          '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                      }}
+                    >
+                      Available for opportunities
+                    </p>
+                    <p
+                      className="text-sm"
+                      style={{
+                        color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                        fontFamily:
+                          '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                      }}
+                    >
+                      Open to internships, projects & collaborations
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         );
