@@ -16,6 +16,8 @@ import {
   Rocket,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import ContactForm from "./ContactForm";
+import HealthCheck from "./HealthCheck";
 
 interface Window {
   id: string;
@@ -1717,6 +1719,9 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 </div>
               </motion.div>
 
+              {/* Contact Form */}
+              <ContactForm isDarkMode={isDarkMode} />
+
               {/* Availability Status */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -1784,6 +1789,356 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         color: isDarkMode ? "#9CA3AF" : "#6B7280",
                         fontFamily:
                           '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                      }}
+                    >
+                      Open to internships, projects & collaborations
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        );
+
+      case "contact":
+        return (
+          <div className="w-full space-y-16">
+            {/* Hero Section */}
+            <div className="text-center space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                className="space-y-4"
+              >
+                <h1
+                  className="text-4xl lg:text-5xl xl:text-6xl font-bold"
+                  style={{
+                    fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    letterSpacing: "-0.03em",
+                    lineHeight: "1.1",
+                    color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                  }}
+                >
+                  Let's Connect
+                </h1>
+                <p
+                  className="text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
+                  style={{
+                    color: isDarkMode ? "#D1D5DB" : "#4B5563",
+                    fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                    lineHeight: "1.6",
+                  }}
+                >
+                  Whether it's a project idea, collaboration opportunity, or just a friendly hello
+                </p>
+              </motion.div>
+
+              {/* Floating Elements */}
+              <div className="relative">
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 rounded-full"
+                    style={{
+                      background: isDarkMode
+                        ? `linear-gradient(45deg, #3B82F6${Math.floor(Math.random() * 50 + 30).toString(16)}, #8B5CF6${Math.floor(Math.random() * 50 + 30).toString(16)})`
+                        : `linear-gradient(45deg, #FBBF24${Math.floor(Math.random() * 50 + 30).toString(16)}, #F59E0B${Math.floor(Math.random() * 50 + 30).toString(16)})`,
+                      left: `${20 + Math.random() * 60}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      y: [0, -30, 0],
+                      opacity: [0.4, 1, 0.4],
+                      scale: [1, 1.5, 1],
+                    }}
+                    transition={{
+                      duration: 3 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: i * 0.5,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Contact Methods */}
+            <div className="space-y-12">
+              {/* Primary Contact - Email */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.3,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="text-center"
+              >
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                  }}
+                  className="inline-block cursor-pointer group"
+                  onClick={() => window.open("mailto:shreyparekh3@gmail.com", "_blank")}
+                >
+                  <div
+                    className="relative p-8 lg:p-12 rounded-3xl"
+                    style={{
+                      background: isDarkMode
+                        ? "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%)"
+                        : "linear-gradient(135deg, #EFF6FF 0%, #F3E8FF 100%)",
+                      border: isDarkMode
+                        ? "2px solid rgba(99, 102, 241, 0.3)"
+                        : "2px solid rgba(99, 102, 241, 0.2)",
+                      boxShadow: isDarkMode
+                        ? "0 20px 60px rgba(99, 102, 241, 0.2)"
+                        : "0 20px 60px rgba(99, 102, 241, 0.15)",
+                    }}
+                  >
+                    <div className="relative z-10 space-y-6">
+                      <motion.div
+                        className="flex justify-center"
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <div
+                          className="w-20 h-20 lg:w-24 lg:h-24 rounded-3xl flex items-center justify-center"
+                          style={{
+                            background: isDarkMode
+                              ? "linear-gradient(135deg, #6366F1, #8B5CF6)"
+                              : "linear-gradient(135deg, #FBBF24, #F59E0B)",
+                            boxShadow: isDarkMode
+                              ? "0 10px 40px rgba(99, 102, 241, 0.4)"
+                              : "0 10px 40px rgba(251, 191, 36, 0.4)",
+                          }}
+                        >
+                          <Mail className="w-10 h-10 lg:w-12 lg:h-12 text-white" strokeWidth={1.5} />
+                        </div>
+                      </motion.div>
+
+                      <div className="space-y-4">
+                        <h2
+                          className="text-2xl lg:text-3xl font-bold"
+                          style={{
+                            color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                            fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                          }}
+                        >
+                          Drop me a line
+                        </h2>
+                        <p
+                          className="text-lg lg:text-xl font-medium"
+                          style={{
+                            color: isDarkMode ? "#6366F1" : "#F59E0B",
+                            fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          }}
+                        >
+                          shreyparekh3@gmail.com
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Social Connections */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.6,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="space-y-8"
+              >
+                <div className="text-center">
+                  <h3
+                    className="text-2xl lg:text-3xl font-bold mb-4"
+                    style={{
+                      color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                      fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                    }}
+                  >
+                    Find me around the web
+                  </h3>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                  {[
+                    {
+                      name: "LinkedIn",
+                      description: "Professional network",
+                      icon: Linkedin,
+                      url: "https://www.linkedin.com/in/shrey-parekh-599a44276/",
+                      color: isDarkMode ? "#0EA5E9" : "#0369A1",
+                      bgGradient: isDarkMode
+                        ? "linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%)"
+                        : "linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)",
+                    },
+                    {
+                      name: "GitHub",
+                      description: "Code & projects",
+                      icon: Github,
+                      url: "https://github.com/Shrey-Parekh",
+                      color: isDarkMode ? "#64748B" : "#334155",
+                      bgGradient: isDarkMode
+                        ? "linear-gradient(135deg, rgba(100, 116, 139, 0.15) 0%, rgba(71, 85, 105, 0.1) 100%)"
+                        : "linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)",
+                    },
+                  ].map((platform, index) => (
+                    <motion.div
+                      key={platform.name}
+                      initial={{ opacity: 0, y: 30, rotateY: -10 }}
+                      animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.8 + index * 0.2,
+                        ease: [0.23, 1, 0.32, 1],
+                      }}
+                      whileHover={{
+                        scale: 1.05,
+                        y: -8,
+                        rotateY: 5,
+                        transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                      }}
+                      className="relative group cursor-pointer"
+                      onClick={() => window.open(platform.url, "_blank")}
+                    >
+                      <div
+                        className="p-8 rounded-3xl relative overflow-hidden"
+                        style={{
+                          background: platform.bgGradient,
+                          border: `2px solid ${platform.color}30`,
+                          boxShadow: isDarkMode
+                            ? `0 15px 50px ${platform.color}20`
+                            : `0 15px 50px ${platform.color}15`,
+                        }}
+                      >
+                        <div className="relative z-10 text-center space-y-4">
+                          <motion.div
+                            className="flex justify-center"
+                            animate={{ rotate: [0, 5, -5, 0] }}
+                            transition={{
+                              duration: 4,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: index * 0.5,
+                            }}
+                          >
+                            <div
+                              className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                              style={{
+                                background: `linear-gradient(135deg, ${platform.color}80, ${platform.color}60)`,
+                                boxShadow: `0 8px 32px ${platform.color}40`,
+                              }}
+                            >
+                              <platform.icon className="w-8 h-8 text-white" strokeWidth={1.5} />
+                            </div>
+                          </motion.div>
+
+                          <div className="space-y-2">
+                            <h4
+                              className="text-xl font-bold"
+                              style={{
+                                color: isDarkMode ? "#FFFFFF" : "#1F2937",
+                                fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                              }}
+                            >
+                              {platform.name}
+                            </h4>
+                            <p
+                              className="text-sm"
+                              style={{
+                                color: platform.color,
+                                fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                              }}
+                            >
+                              {platform.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Contact Form */}
+              <ContactForm isDarkMode={isDarkMode} />
+
+              {/* Availability Status */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 1.8,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="text-center"
+              >
+                <motion.div
+                  className="inline-flex items-center space-x-4 px-8 py-6 rounded-3xl"
+                  style={{
+                    background: isDarkMode
+                      ? "linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%)"
+                      : "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)",
+                    border: isDarkMode
+                      ? "2px solid rgba(16, 185, 129, 0.3)"
+                      : "2px solid rgba(16, 185, 129, 0.2)",
+                    boxShadow: isDarkMode
+                      ? "0 15px 50px rgba(16, 185, 129, 0.2)"
+                      : "0 15px 50px rgba(16, 185, 129, 0.15)",
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  <motion.div
+                    className="w-4 h-4 rounded-full"
+                    style={{
+                      background: isDarkMode
+                        ? "linear-gradient(135deg, #10B981, #059669)"
+                        : "linear-gradient(135deg, #34D399, #10B981)",
+                    }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      boxShadow: [
+                        "0 0 0 0 rgba(16, 185, 129, 0.4)",
+                        "0 0 0 8px rgba(16, 185, 129, 0)",
+                        "0 0 0 0 rgba(16, 185, 129, 0)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <div className="text-left">
+                    <p
+                      className="text-lg font-bold"
+                      style={{
+                        color: isDarkMode ? "#10B981" : "#059669",
+                        fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                      }}
+                    >
+                      Available for opportunities
+                    </p>
+                    <p
+                      className="text-sm"
+                      style={{
+                        color: isDarkMode ? "#9CA3AF" : "#6B7280",
+                        fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                       }}
                     >
                       Open to internships, projects & collaborations
