@@ -1,3 +1,6 @@
+/* Import macOS system fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,19 +15,50 @@
   
   body {
     @apply text-white;
-    font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     font-weight: 400;
+    font-optical-sizing: auto;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: default;
   }
 
-  /* Ensure SF Pro font is used throughout */
-  * {
-    font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Enhanced macOS typography system */
+  .sf-pro-display {
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .sf-pro-text {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Ensure consistent font rendering across all elements */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  p, span, div {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Default Cursor Styles */
@@ -186,6 +220,45 @@
     to { 
       opacity: 1; 
       transform: scale(1); 
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .portfolio-gradient-text {
+    /* Only apply transparent fill if background-clip is supported */
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Fallback for browsers that don't support background-clip: text */
+  @supports not (-webkit-background-clip: text) {
+    .portfolio-gradient-text {
+      color: #60A5FA !important;
+      -webkit-text-fill-color: #60A5FA !important;
+      background: none !important;
+    }
+    
+    /* Light mode fallback */
+    .light .portfolio-gradient-text {
+      color: #1E40AF !important;
+      -webkit-text-fill-color: #1E40AF !important;
+    }
+  }
+
+  /* Additional safety for webkit browsers */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .portfolio-gradient-text {
+      -webkit-text-fill-color: transparent;
     }
   }
 }

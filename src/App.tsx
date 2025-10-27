@@ -23,6 +23,9 @@ interface Window {
   position: { x: number; y: number }
   size: { width: number; height: number }
   zIndex: number
+  sourcePosition?: { x: number; y: number }
+  isOpening?: boolean
+  isClosing?: boolean
 }
 
 function App() {
@@ -42,6 +45,39 @@ function App() {
     }
   }, [])
 
+  // Keyboard shortcuts for window management
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Get the focused window (highest z-index)
+      const focusedWindow = windows.reduce((prev, current) => 
+        (prev.zIndex > current.zIndex) ? prev : current, windows[0]
+      )
+
+      if (!focusedWindow) return
+
+      // Cmd/Ctrl + W: Close window
+      if ((e.metaKey || e.ctrlKey) && e.key === 'w') {
+        e.preventDefault()
+        closeWindow(focusedWindow.id)
+      }
+      
+      // Cmd/Ctrl + M: Minimize window
+      if ((e.metaKey || e.ctrlKey) && e.key === 'm') {
+        e.preventDefault()
+        minimizeWindow(focusedWindow.id)
+      }
+      
+      // Cmd/Ctrl + Shift + F: Toggle maximize
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'F') {
+        e.preventDefault()
+        maximizeWindow(focusedWindow.id)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [windows])
+
   const toggleTheme = () => {
     const newTheme = !isDarkMode
     setIsDarkMode(newTheme)
@@ -49,7 +85,7 @@ function App() {
     document.documentElement.classList.toggle('dark')
   }
 
-  const openWindow = (windowType: string) => {
+  const openWindow = (windowType: string, sourceElement?: HTMLElement) => {
     const windowTitles: { [key: string]: string } = {
       'about': 'About Me',
       'projects': 'Projects',
@@ -60,14 +96,40 @@ function App() {
     // Check if window already exists
     const existingWindow = windows.find(w => w.type === windowType)
     if (existingWindow) {
-      // Focus existing window
+      // Focus existing window with genie effect
       setWindows(prev => prev.map(w => 
         w.id === existingWindow.id 
-          ? { ...w, isMinimized: false, zIndex: nextZIndex }
+          ? { 
+              ...w, 
+              isMinimized: false, 
+              zIndex: nextZIndex,
+              isOpening: true,
+              sourcePosition: sourceElement ? {
+                x: sourceElement.getBoundingClientRect().left + sourceElement.offsetWidth / 2,
+                y: sourceElement.getBoundingClientRect().top + sourceElement.offsetHeight / 2
+              } : undefined
+            }
           : w
       ))
       setNextZIndex(prev => prev + 1)
+      
+      // Reset opening state after animation
+      setTimeout(() => {
+        setWindows(prev => prev.map(w => 
+          w.id === existingWindow.id ? { ...w, isOpening: false } : w
+        ))
+      }, 1000)
       return
+    }
+
+    // Get source position from dock icon
+    let sourcePosition = undefined
+    if (sourceElement) {
+      const rect = sourceElement.getBoundingClientRect()
+      sourcePosition = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      }
     }
 
     // Create new window
@@ -78,36 +140,71 @@ function App() {
       isMinimized: false,
       isMaximized: false,
       position: { 
-        x: (window.innerWidth - 800) / 2 + windows.length * 20, 
-        y: (window.innerHeight - 600) / 2 + windows.length * 20 
+        x: Math.max(50, (window.innerWidth - 800) / 2 + windows.length * 20), 
+        y: Math.max(100, (window.innerHeight - 600) / 2 + windows.length * 20) 
       },
-      size: { width: 800, height: 600 },
-      zIndex: nextZIndex
+      size: { 
+        width: Math.min(800, window.innerWidth - 100), 
+        height: Math.min(600, window.innerHeight - 200) 
+      },
+      zIndex: nextZIndex,
+      sourcePosition,
+      isOpening: true
     }
 
     setWindows(prev => [...prev, newWindow])
     setNextZIndex(prev => prev + 1)
+    
+    // Reset opening state after animation
+    setTimeout(() => {
+      setWindows(prev => prev.map(w => 
+        w.id === newWindow.id ? { ...w, isOpening: false } : w
+      ))
+    }, 1000)
   }
 
   const closeWindow = (id: string) => {
-    setWindows(prev => prev.filter(w => w.id !== id))
+    // Add closing animation state before removing
+    setWindows(prev => prev.map(w => 
+      w.id === id ? { ...w, isClosing: true } : w
+    ))
+    
+    // Remove window after animation completes
+    setTimeout(() => {
+      setWindows(prev => prev.filter(w => w.id !== id))
+    }, 400)
   }
 
   const minimizeWindow = (id: string) => {
     setWindows(prev => prev.map(w => 
-      w.id === id ? { ...w, isMinimized: !w.isMinimized } : w
+      w.id === id ? { 
+        ...w, 
+        isMinimized: !w.isMinimized,
+        isOpening: false, // Reset opening state when minimizing
+        isMaximized: w.isMinimized ? w.isMaximized : false // Reset maximize when minimizing
+      } : w
     ))
   }
 
   const maximizeWindow = (id: string) => {
     setWindows(prev => prev.map(w => 
-      w.id === id ? { ...w, isMaximized: !w.isMaximized } : w
+      w.id === id ? { 
+        ...w, 
+        isMaximized: !w.isMaximized,
+        isMinimized: false, // Ensure window is not minimized when maximizing
+        zIndex: nextZIndex // Bring to front when maximizing
+      } : w
     ))
+    setNextZIndex(prev => prev + 1)
   }
 
   const focusWindow = (id: string) => {
     setWindows(prev => prev.map(w => 
-      w.id === id ? { ...w, zIndex: nextZIndex } : w
+      w.id === id ? { 
+        ...w, 
+        zIndex: nextZIndex,
+        isMinimized: false // Restore window when focusing
+      } : w
     ))
     setNextZIndex(prev => prev + 1)
   }
