@@ -6,8 +6,137 @@ import {
   useTransform,
 } from "framer-motion";
 
+// macOS-style Typing Animation Component
+const TypingAnimation: React.FC = () => {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+
+  const words = [
+    "Web Development",
+    "Vibe Coding",
+    "Tech Enthusiast",
+    "AI/ML",
+    "Rest Development",
+    "Software Development",
+    "Web Dev",
+  ];
+
+  useEffect(() => {
+    const currentWord = words[currentWordIndex];
+    const shouldDelete = isDeleting;
+
+    const timeout = setTimeout(
+      () => {
+        if (!shouldDelete) {
+          // Typing
+          if (currentText.length < currentWord.length) {
+            setCurrentText(currentWord.slice(0, currentText.length + 1));
+          } else {
+            // Pause before deleting
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          // Deleting
+          if (currentText.length > 0) {
+            setCurrentText(currentText.slice(0, -1));
+          } else {
+            setIsDeleting(false);
+            setCurrentWordIndex((prev) => (prev + 1) % words.length);
+          }
+        }
+      },
+      shouldDelete ? 50 : 100
+    ); // Faster deletion, slower typing
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentWordIndex, words]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 530); // macOS-like cursor blink rate
+
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 1,
+        delay: 1.4,
+        ease: [0.23, 1, 0.32, 1],
+      }}
+      className="mb-12 relative"
+    >
+      <div className="flex items-center justify-center">
+        <motion.span
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal"
+          style={{
+            fontFamily:
+              '".SF NS Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+            fontWeight: 400,
+            color: "rgba(255, 255, 255, 0.9)",
+            textShadow: "0 2px 15px rgba(0, 0, 0, 0.3)",
+            letterSpacing: "0.01em",
+            minHeight: "1.2em",
+          }}
+        >
+          {currentText}
+        </motion.span>
+        <motion.span
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal ml-1"
+          style={{
+            fontFamily:
+              '".SF NS Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+            color: "#007AFF",
+            opacity: showCursor ? 1 : 0,
+          }}
+          animate={{
+            opacity: showCursor ? [1, 1, 0, 0] : [0, 0, 1, 1],
+          }}
+          transition={{
+            duration: 1.06,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          |
+        </motion.span>
+      </div>
+
+      {/* Terminal-like background */}
+      <motion.div
+        className="absolute inset-0 -m-4 rounded-lg opacity-10"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(30, 41, 59, 0.2) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(10px)",
+        }}
+        animate={{
+          opacity: [0.05, 0.15, 0.05],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </motion.div>
+  );
+};
+
 // Minimalistic Interactive Background Component
-const Hero3D: React.FC = () => {
+interface Hero3DProps {
+  isDarkMode: boolean;
+}
+
+const Hero3D: React.FC<Hero3DProps> = ({ isDarkMode }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -494,6 +623,257 @@ const Hero3D: React.FC = () => {
             }}
           />
         ))}
+
+      {/* Hero Content - Exact Match to Original Design */}
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <div className="text-center px-6 sm:px-8 md:px-12 lg:px-16 max-w-5xl mx-auto">
+          {/* Shrey Parekh */}
+          <motion.div
+            initial={{ opacity: 0, y: 100, rotateX: -20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+            transition={{
+              duration: 1.8,
+              delay: 0.3,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="mb-8 relative perspective-1000 group"
+          >
+            <motion.h1
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light leading-none tracking-tight relative pointer-events-auto cursor-pointer"
+              style={{
+                fontFamily:
+                  '".SF NS Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+                fontWeight: 200,
+                letterSpacing: "-0.04em",
+                color: "#FFFFFF",
+              }}
+              whileHover={{
+                scale: 1.05,
+                y: -8,
+                letterSpacing: "0.01em",
+                textShadow:
+                  "0 8px 32px rgba(255, 255, 255, 0.3), 0 0 60px rgba(139, 92, 246, 0.2)",
+                transition: {
+                  duration: 0.4,
+                  ease: [0.34, 1.56, 0.64, 1],
+                },
+              }}
+            >
+              Shrey Parekh
+            </motion.h1>
+
+            {/* Animated gradient underline */}
+            <motion.div
+              className="absolute -bottom-3 left-1/2 h-1 rounded-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, #8B5CF6, #3B82F6, #06B6D4, transparent)",
+                backgroundSize: "200% 100%",
+              }}
+              initial={{ width: 0, x: "-50%", opacity: 0 }}
+              whileHover={{
+                width: "70%",
+                opacity: 1,
+                backgroundPosition: ["0% 50%", "100% 50%"],
+              }}
+              transition={{
+                width: { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] },
+                opacity: { duration: 0.3 },
+                backgroundPosition: {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+              }}
+            />
+
+            {/* Subtle glow effect */}
+            <motion.div
+              className="absolute inset-0 rounded-full blur-2xl pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 100% 50%, rgba(139, 92, 246, 0.15), transparent)",
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ opacity: 1, scale: 1.2 }}
+              transition={{ duration: 0.4 }}
+            />
+          </motion.div>
+
+          {/* Portfolio */}
+          <motion.div
+            initial={{ opacity: 0, y: 80, rotateY: -15, scale: 0.7 }}
+            animate={{ opacity: 1, y: 0, rotateY: 0, scale: 1 }}
+            transition={{
+              duration: 1.6,
+              delay: 1.0,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="mb-16 relative perspective-1000 group"
+          >
+            <motion.h2
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-none tracking-tight pointer-events-auto cursor-pointer"
+              style={{
+                fontFamily:
+                  '".SF NS Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+                fontWeight: 300,
+                letterSpacing: "-0.04em",
+                color: isDarkMode ? "#FF6B9D" : "#3B82F6",
+              }}
+              animate={{
+                color: isDarkMode ? "#FF6B9D" : "#3B82F6",
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              whileHover={{
+                scale: 1.06,
+                y: -10,
+                color: isDarkMode ? "#FFB3D1" : "#60A5FA",
+                letterSpacing: "0.02em",
+                textShadow: isDarkMode
+                  ? "0 8px 40px rgba(255, 107, 157, 0.5), 0 0 80px rgba(255, 107, 157, 0.3)"
+                  : "0 8px 40px rgba(59, 130, 246, 0.5), 0 0 80px rgba(59, 130, 246, 0.3)",
+                rotateY: 5,
+                transition: {
+                  duration: 0.4,
+                  ease: [0.34, 1.56, 0.64, 1],
+                },
+              }}
+            >
+              Portfolio
+            </motion.h2>
+
+            {/* Animated gradient underline with shimmer */}
+            <motion.div
+              className="absolute -bottom-4 left-1/2 h-1 rounded-full"
+              style={{
+                backgroundSize: "200% 100%",
+              }}
+              animate={{
+                background: isDarkMode
+                  ? "linear-gradient(90deg, transparent, #FF6B9D, #FFB74D, #E91E63, #FF8A80, transparent)"
+                  : "linear-gradient(90deg, transparent, #3B82F6, #60A5FA, #2563EB, #1D4ED8, transparent)",
+              }}
+              initial={{ width: 0, x: "-50%", opacity: 0 }}
+              whileHover={{
+                width: "60%",
+                opacity: 1,
+                backgroundPosition: ["0% 50%", "200% 50%"],
+              }}
+              transition={{
+                background: { duration: 0.5 },
+                width: { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] },
+                opacity: { duration: 0.3 },
+                backgroundPosition: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+              }}
+            />
+
+            {/* Radial glow effect */}
+            <motion.div
+              className="absolute inset-0 rounded-full blur-3xl pointer-events-none"
+              animate={{
+                background: isDarkMode
+                  ? "radial-gradient(ellipse 100% 50%, rgba(255, 107, 157, 0.2), transparent)"
+                  : "radial-gradient(ellipse 100% 50%, rgba(59, 130, 246, 0.2), transparent)",
+              }}
+              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ opacity: 1, scale: 1.3 }}
+            />
+
+            {/* Floating particles on hover */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 rounded-full pointer-events-none"
+                style={{
+                  background: isDarkMode
+                    ? i % 2 === 0
+                      ? "#FF6B9D"
+                      : "#FFB74D"
+                    : i % 2 === 0
+                    ? "#3B82F6"
+                    : "#60A5FA",
+                  left: `${30 + i * 20}%`,
+                  top: "50%",
+                  boxShadow: isDarkMode
+                    ? `0 0 10px ${i % 2 === 0 ? "#FF6B9D" : "#FFB74D"}`
+                    : `0 0 10px ${i % 2 === 0 ? "#3B82F6" : "#60A5FA"}`,
+                }}
+                initial={{ opacity: 0, y: 0, scale: 0 }}
+                whileHover={{
+                  opacity: [0, 1, 0],
+                  y: [-20, -40],
+                  scale: [0, 1.5, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  delay: i * 0.1,
+                  repeat: Infinity,
+                }}
+              />
+            ))}
+          </motion.div>
+
+          {/* macOS-style Typing Animation */}
+          <TypingAnimation />
+
+          {/* Professional Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 2.0,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="mb-16 relative"
+          >
+            <motion.p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed pointer-events-auto cursor-pointer"
+              style={{
+                fontFamily:
+                  '".SF NS Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+                fontWeight: 300,
+                color: "rgba(255, 255, 255, 0.8)",
+                textShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+                lineHeight: "1.6",
+                letterSpacing: "0.005em",
+              }}
+              whileHover={{
+                color: "rgba(255, 255, 255, 1)",
+                scale: 1.03,
+                y: -5,
+                textShadow:
+                  "0 8px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(59, 130, 246, 0.2)",
+                letterSpacing: "0.01em",
+                transition: {
+                  duration: 0.4,
+                  ease: [0.34, 1.56, 0.64, 1],
+                },
+              }}
+            >
+            </motion.p>
+
+            {/* Subtle background glow on hover */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl blur-2xl pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 50%, rgba(59, 130, 246, 0.1), transparent)",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileHover={{ opacity: 1, scale: 1.1 }}
+              transition={{ duration: 0.4 }}
+            />
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 };
