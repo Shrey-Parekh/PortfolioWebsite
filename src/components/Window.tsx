@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { X, Minus, Square } from 'lucide-react'
 
 interface WindowProps {
   title: string
@@ -60,7 +59,6 @@ const Window: React.FC<WindowProps> = ({ title, children, className = '', width 
       animate={{ 
         opacity: 1, 
         scale: 1, 
-        y: 0,
         x: position.x,
         y: position.y
       }}

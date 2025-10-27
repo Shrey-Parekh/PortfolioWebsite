@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 // Components
 import Dock from './components/Dock'
 import MenuBar from './components/MenuBar'
 import WindowManager from './components/WindowManager'
-
-
-// Pages
-import Home from './pages/Home'
+import Hero3D from './components/Hero3D'
 
 // Context
 import { ThemeProvider } from './context/ThemeContext'
@@ -85,7 +82,7 @@ function App() {
     document.documentElement.classList.toggle('dark')
   }
 
-  const openWindow = (windowType: string, sourceElement?: HTMLElement) => {
+  const openWindow = useCallback((windowType: string, sourceElement?: HTMLElement) => {
     const windowTitles: { [key: string]: string } = {
       'about': 'About Me',
       'projects': 'Projects',
@@ -182,9 +179,9 @@ function App() {
         w.id === newWindow.id ? { ...w, isOpening: false } : w
       ))
     }, 1000)
-  }
+  }, [windows, nextZIndex])
 
-  const closeWindow = (id: string) => {
+  const closeWindow = useCallback((id: string) => {
     // Add closing animation state before removing
     setWindows(prev => prev.map(w => 
       w.id === id ? { ...w, isClosing: true } : w
@@ -194,9 +191,9 @@ function App() {
     setTimeout(() => {
       setWindows(prev => prev.filter(w => w.id !== id))
     }, 400)
-  }
+  }, [])
 
-  const minimizeWindow = (id: string) => {
+  const minimizeWindow = useCallback((id: string) => {
     setWindows(prev => prev.map(w => 
       w.id === id ? { 
         ...w, 
@@ -205,9 +202,9 @@ function App() {
         isMaximized: w.isMinimized ? w.isMaximized : false // Reset maximize when minimizing
       } : w
     ))
-  }
+  }, [])
 
-  const maximizeWindow = (id: string) => {
+  const maximizeWindow = useCallback((id: string) => {
     setWindows(prev => prev.map(w => 
       w.id === id ? { 
         ...w, 
@@ -217,9 +214,9 @@ function App() {
       } : w
     ))
     setNextZIndex(prev => prev + 1)
-  }
+  }, [nextZIndex])
 
-  const focusWindow = (id: string) => {
+  const focusWindow = useCallback((id: string) => {
     setWindows(prev => prev.map(w => 
       w.id === id ? { 
         ...w, 
@@ -228,13 +225,13 @@ function App() {
       } : w
     ))
     setNextZIndex(prev => prev + 1)
-  }
+  }, [nextZIndex])
 
-  const updateWindowPosition = (id: string, position: { x: number; y: number }) => {
+  const updateWindowPosition = useCallback((id: string, position: { x: number; y: number }) => {
     setWindows(prev => prev.map(w => 
       w.id === id ? { ...w, position } : w
     ))
-  }
+  }, [])
 
   const pageVariants = {
     initial: { 
@@ -298,7 +295,7 @@ function App() {
                   transition={pageTransition}
                   className="h-full"
                 >
-                  <Home />
+                  <Hero3D />
                 </motion.div>
               } />
             </Routes>

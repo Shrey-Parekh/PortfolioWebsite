@@ -3,18 +3,10 @@ import { motion } from 'framer-motion'
 import { 
   Home, 
   User, 
-  FolderOpen, 
-  Trophy, 
   Code, 
-  Mail, 
-  FileText,
   BookOpen,
-  Monitor,
   Briefcase,
-  Award,
-  MessageSquare,
-  Download,
-  Book
+  MessageSquare
 } from 'lucide-react'
 
 interface DockProps {
