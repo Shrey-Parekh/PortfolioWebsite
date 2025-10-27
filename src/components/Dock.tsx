@@ -57,13 +57,10 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
       return
     }
     
-    if (item.id === 'resume') {
-      // Download resume functionality
-      const link = document.createElement('a')
-      link.href = '/resume.pdf'
-      link.download = 'resume.pdf'
-      link.click()
-      setTimeout(() => setClickedItem(null), 300)
+    if (item.id === 'blog') {
+      // Open blog window
+      onOpenWindow(item.id, element)
+      setTimeout(() => setClickedItem(null), 800)
       return
     }
     

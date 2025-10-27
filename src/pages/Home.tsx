@@ -429,7 +429,7 @@ const Home: React.FC = () => {
               }}
             >
               {/* Animate description text word by word */}
-              {'Building intelligent and seamless digital solutions that blend clean design, smart automation, and the power of AI-driven innovation.'.split(' ').map((word, index) => (
+              {'Crafting intelligent, minimal, and high-performance solutions that combine modern web design, automation, and the precision of AI and Rust-based development.'.split(' ').map((word, index) => (
                 <motion.span
                   key={index}
                   initial={{ opacity: 0, y: 10 }}

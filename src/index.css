@@ -61,17 +61,14 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Default Cursor Styles */
+  /* Hide default cursor and add macOS cursor */
   * {
-    cursor: default;
+    cursor: none !important;
   }
-
-  button, a, [role="button"] {
-    cursor: pointer;
-  }
-
-  .window-title-bar {
-    cursor: move;
+  
+  /* Ensure cursor is hidden on all elements */
+  body, html, div, span, a, button, input, textarea, select {
+    cursor: none !important;
   }
 
   /* Cursor Follow Effect */

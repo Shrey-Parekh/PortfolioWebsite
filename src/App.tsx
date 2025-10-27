@@ -90,7 +90,8 @@ function App() {
       'about': 'About Me',
       'projects': 'Projects',
       'skills': 'Skills & Stack',
-      'contact': 'Contact'
+      'contact': 'Contact',
+      'blog': 'Blog & Articles'
     }
 
     // Check if window already exists
