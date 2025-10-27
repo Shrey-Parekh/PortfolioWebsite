@@ -42,7 +42,7 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
     { id: 'projects', icon: Briefcase, label: 'Projects', path: '/projects' },
     { id: 'skills', icon: Code, label: 'Skills', path: '/skills' },
     { id: 'contact', icon: MessageSquare, label: 'Contact', path: '/contact' },
-    { id: 'resume', icon: Download, label: 'Resume', path: '/resume' }
+    { id: 'blog', icon: BookOpen, label: 'Blog & Articles', path: '/blog' }
   ]
 
   const handleItemClick = (item: DockItem, event: React.MouseEvent) => {

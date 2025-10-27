@@ -132,6 +132,32 @@ function App() {
       }
     }
 
+    // Responsive window sizing
+    const isMobile = window.innerWidth < 640
+    const isTablet = window.innerWidth >= 640 && window.innerWidth < 1024
+    
+    let windowWidth, windowHeight, posX, posY
+    
+    if (isMobile) {
+      // Mobile: Use most of the screen
+      windowWidth = Math.min(window.innerWidth - 32, 400)
+      windowHeight = Math.min(window.innerHeight - 120, 500)
+      posX = Math.max(16, (window.innerWidth - windowWidth) / 2)
+      posY = Math.max(60, (window.innerHeight - windowHeight) / 2)
+    } else if (isTablet) {
+      // Tablet: Moderate sizing
+      windowWidth = Math.min(600, window.innerWidth - 80)
+      windowHeight = Math.min(500, window.innerHeight - 160)
+      posX = Math.max(40, (window.innerWidth - windowWidth) / 2 + windows.length * 15)
+      posY = Math.max(80, (window.innerHeight - windowHeight) / 2 + windows.length * 15)
+    } else {
+      // Desktop: Original sizing
+      windowWidth = Math.min(800, window.innerWidth - 100)
+      windowHeight = Math.min(600, window.innerHeight - 200)
+      posX = Math.max(50, (window.innerWidth - windowWidth) / 2 + windows.length * 20)
+      posY = Math.max(100, (window.innerHeight - windowHeight) / 2 + windows.length * 20)
+    }
+
     // Create new window
     const newWindow: Window = {
       id: `${windowType}-${Date.now()}`,
@@ -139,14 +165,8 @@ function App() {
       title: windowTitles[windowType] || windowType,
       isMinimized: false,
       isMaximized: false,
-      position: { 
-        x: Math.max(50, (window.innerWidth - 800) / 2 + windows.length * 20), 
-        y: Math.max(100, (window.innerHeight - 600) / 2 + windows.length * 20) 
-      },
-      size: { 
-        width: Math.min(800, window.innerWidth - 100), 
-        height: Math.min(600, window.innerHeight - 200) 
-      },
+      position: { x: posX, y: posY },
+      size: { width: windowWidth, height: windowHeight },
       zIndex: nextZIndex,
       sourcePosition,
       isOpening: true
