@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import ContactForm from "./ContactForm";
-import HealthCheck from "./HealthCheck";
 
 interface Window {
   id: string;

@@ -857,8 +857,7 @@ const Hero3D: React.FC<Hero3DProps> = ({ isDarkMode }) => {
                   ease: [0.34, 1.56, 0.64, 1],
                 },
               }}
-            >
-            </motion.p>
+            ></motion.p>
 
             {/* Subtle background glow on hover */}
             <motion.div

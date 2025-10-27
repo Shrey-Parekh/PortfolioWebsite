@@ -13,7 +13,7 @@ interface HealthStatus {
   timestamp?: string;
 }
 
-const HealthCheck: React.FC<HealthCheckProps> = ({ isDarkMode }) => {
+const HealthCheck: React.FC<HealthCheckProps> = () => {
   const [health, setHealth] = useState<HealthStatus>({
     status: 'checking',
     message: 'Checking backend connection...'
