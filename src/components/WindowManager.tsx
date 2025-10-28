@@ -60,37 +60,27 @@ const WindowManager: React.FC<WindowManagerProps> = ({
     switch (type) {
       case "about":
         return (
-          <div className="w-full space-y-16">
-            {/* Hero Story Section */}
+          <div className="w-full space-y-12">
+            {/* Centered Hero Section */}
             <div className="relative">
-              {/* Ambient Background Elements - Day/Night Reactive */}
+              {/* Floating Background Particles */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(8)].map((_, i) => (
+                {[...Array(6)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-2 h-2 rounded-full"
+                    className="absolute w-1.5 h-1.5 rounded-full"
                     style={{
-                      background: isDarkMode
-                        ? `linear-gradient(45deg, #3B82F6${Math.floor(
-                            Math.random() * 50 + 30
-                          ).toString(16)}, #8B5CF6${Math.floor(
-                            Math.random() * 50 + 30
-                          ).toString(16)})`
-                        : `linear-gradient(45deg, #FBBF24${Math.floor(
-                            Math.random() * 50 + 30
-                          ).toString(16)}, #F59E0B${Math.floor(
-                            Math.random() * 50 + 30
-                          ).toString(16)})`,
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
+                      background: isDarkMode ? "#3B82F6" : "#F59E0B",
+                      left: `${20 + Math.random() * 60}%`,
+                      top: `${20 + Math.random() * 60}%`,
+                      opacity: 0.3,
                     }}
                     animate={{
-                      y: [0, -20, 0],
-                      opacity: [0.3, 0.8, 0.3],
-                      scale: [1, 1.2, 1],
+                      y: [0, -15, 0],
+                      opacity: [0.2, 0.5, 0.2],
                     }}
                     transition={{
-                      duration: 4 + Math.random() * 2,
+                      duration: 3 + Math.random() * 2,
                       repeat: Infinity,
                       delay: i * 0.5,
                       ease: "easeInOut",
@@ -99,53 +89,65 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 ))}
               </div>
 
+              {/* Main Content - Centered */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-                className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16"
+                className="flex flex-col items-center gap-12"
               >
-                {/* Profile Visual Story */}
+                {/* Profile Photo - Centered */}
                 <motion.div
-                  initial={{ opacity: 0, x: -80, rotateY: -20 }}
-                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{
-                    duration: 1.4,
-                    delay: 0.3,
+                    duration: 1.2,
+                    delay: 0.2,
                     ease: [0.23, 1, 0.32, 1],
                   }}
-                  className="relative flex-shrink-0"
+                  className="relative group"
                 >
-                  {/* Main Image Container */}
                   <motion.div
-                    className="relative w-64 h-64 lg:w-80 lg:h-80"
-                    whileHover={{
-                      scale: 1.05,
-                      rotateY: 8,
-                      transition: { duration: 0.6, ease: [0.23, 1, 0.32, 1] },
-                    }}
+                    className="relative w-56 h-56 lg:w-64 lg:h-64"
+                    whileHover="hover"
+                    initial="initial"
                   >
-                    {/* Professional Border - Day/Night Reactive */}
-                    <div
+                    {/* Gradient border with subtle animation */}
+                    <motion.div
                       className="absolute inset-0 rounded-full"
                       style={{
                         background: isDarkMode
-                          ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)"
-                          : "linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.2) 100%)",
+                          ? "linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899)"
+                          : "linear-gradient(135deg, #FBBF24, #F59E0B, #EF4444)",
                         padding: "3px",
                       }}
+                      variants={{
+                        initial: { opacity: 0.8 },
+                        hover: { opacity: 1 },
+                      }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <div
-                        className="w-full h-full rounded-full overflow-hidden"
+                      <motion.div
+                        className="w-full h-full rounded-full overflow-hidden relative"
                         style={{
                           background: isDarkMode ? "#1C1C1E" : "#FFFFFF",
-                          boxShadow: isDarkMode
-                            ? "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
-                            : "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
                         }}
+                        variants={{
+                          initial: { 
+                            boxShadow: isDarkMode
+                              ? "0 8px 32px rgba(0, 0, 0, 0.3)"
+                              : "0 8px 32px rgba(0, 0, 0, 0.1)",
+                          },
+                          hover: { 
+                            boxShadow: isDarkMode
+                              ? "0 12px 48px rgba(59, 130, 246, 0.4)"
+                              : "0 12px 48px rgba(251, 191, 36, 0.4)",
+                          },
+                        }}
+                        transition={{ duration: 0.4 }}
                       >
                         <motion.img
-                          src="/src/components/image.jpg"
+                          src="/image.jpg"
                           alt="Shrey Parekh"
                           className="w-full h-full object-cover"
                           style={{
@@ -153,37 +155,43 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                               ? "brightness(0.95) contrast(1.05) saturate(1.1)"
                               : "brightness(1.02) contrast(1.03) saturate(1.05)",
                           }}
-                          whileHover={{
-                            scale: 1.02,
-                            transition: {
-                              duration: 0.4,
-                              ease: [0.23, 1, 0.32, 1],
-                            },
+                          variants={{
+                            initial: { scale: 1 },
+                            hover: { scale: 1.05 },
                           }}
+                          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                         />
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
 
-                    {/* Professional Status Indicators */}
+                    {/* Subtle glow on hover */}
                     <motion.div
-                      className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center"
+                      className="absolute inset-0 rounded-full blur-xl pointer-events-none"
                       style={{
                         background: isDarkMode
-                          ? "linear-gradient(135deg, #10B981, #059669)"
-                          : "linear-gradient(135deg, #34D399, #10B981)",
-                        boxShadow: isDarkMode
-                          ? "0 2px 12px rgba(16, 185, 129, 0.3)"
-                          : "0 2px 12px rgba(52, 211, 153, 0.4)",
-                        border: isDarkMode
-                          ? "2px solid #1C1C1E"
-                          : "2px solid #FFFFFF",
+                          ? "radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%)"
+                          : "radial-gradient(circle, rgba(251, 191, 36, 0.3), transparent 70%)",
+                      }}
+                      variants={{
+                        initial: { opacity: 0, scale: 0.9 },
+                        hover: { opacity: 1, scale: 1.1 },
+                      }}
+                      transition={{ duration: 0.4 }}
+                    />
+
+                    {/* Status indicator */}
+                    <motion.div
+                      className="absolute top-2 right-2 w-5 h-5 rounded-full flex items-center justify-center"
+                      style={{
+                        background: "linear-gradient(135deg, #10B981, #059669)",
+                        boxShadow: "0 2px 12px rgba(16, 185, 129, 0.4)",
+                        border: isDarkMode ? "2px solid #1C1C1E" : "2px solid #FFFFFF",
                       }}
                       animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.9, 1, 0.9],
+                        scale: [1, 1.15, 1],
                       }}
                       transition={{
-                        duration: 4,
+                        duration: 2,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -191,31 +199,12 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       <div className="w-2 h-2 bg-white rounded-full" />
                     </motion.div>
 
-                    {/* Subtle Tech Badge */}
-                    <motion.div
-                      className="absolute -bottom-4 -left-4 w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: isDarkMode
-                          ? "rgba(59, 130, 246, 0.8)"
-                          : "rgba(251, 191, 36, 0.8)",
-                        backdropFilter: "blur(20px)",
-                        border: isDarkMode
-                          ? "1px solid rgba(255, 255, 255, 0.1)"
-                          : "1px solid rgba(255, 255, 255, 0.8)",
-                      }}
-                      whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 0.3 },
-                      }}
-                    >
-                      <Code className="w-5 h-5 text-white" strokeWidth={1.5} />
-                    </motion.div>
+
                   </motion.div>
                 </motion.div>
 
-                {/* Personal Story Content */}
-                <div className="flex-1 space-y-8 text-center lg:text-left">
-                  {/* Name & Identity */}
+                {/* Personal Story Content - Centered */}
+                <div className="w-full max-w-3xl space-y-8 text-center">
                   <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -230,8 +219,7 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       <motion.h1
                         className="text-5xl lg:text-6xl xl:text-7xl font-bold"
                         style={{
-                          fontFamily:
-                            '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
                           letterSpacing: "-0.04em",
                           lineHeight: "0.9",
                           color: isDarkMode ? "#FFFFFF" : "#1F2937",
@@ -248,8 +236,7 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         className="text-xl lg:text-2xl font-medium"
                         style={{
                           color: isDarkMode ? "#3B82F6" : "#F59E0B",
-                          fontFamily:
-                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                         }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -259,35 +246,16 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                       </motion.p>
                     </div>
 
-                    {/* Dynamic Role Tags - Theme Reactive */}
                     <motion.div
-                      className="flex flex-wrap gap-3 justify-center lg:justify-start"
+                      className="flex flex-wrap gap-3 justify-center"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1, duration: 0.8 }}
                     >
                       {[
-                        {
-                          text: "CS Student @ MPSTME",
-                          color: isDarkMode ? "#3B82F6" : "#1E40AF",
-                          bg: isDarkMode
-                            ? "rgba(59, 130, 246, 0.15)"
-                            : "#EFF6FF",
-                        },
-                        {
-                          text: "AI/ML Explorer",
-                          color: isDarkMode ? "#8B5CF6" : "#7C3AED",
-                          bg: isDarkMode
-                            ? "rgba(139, 92, 246, 0.15)"
-                            : "#F3E8FF",
-                        },
-                        {
-                          text: "Problem Solver",
-                          color: isDarkMode ? "#10B981" : "#059669",
-                          bg: isDarkMode
-                            ? "rgba(16, 185, 129, 0.15)"
-                            : "#ECFDF5",
-                        },
+                        { text: "CS Student @ MPSTME", color: isDarkMode ? "#3B82F6" : "#1E40AF", bg: isDarkMode ? "rgba(59, 130, 246, 0.15)" : "#EFF6FF" },
+                        { text: "AI/ML Explorer", color: isDarkMode ? "#8B5CF6" : "#7C3AED", bg: isDarkMode ? "rgba(139, 92, 246, 0.15)" : "#F3E8FF" },
+                        { text: "Problem Solver", color: isDarkMode ? "#10B981" : "#059669", bg: isDarkMode ? "rgba(16, 185, 129, 0.15)" : "#ECFDF5" },
                       ].map((tag, index) => (
                         <motion.span
                           key={index}
@@ -296,8 +264,7 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                             background: tag.bg,
                             color: tag.color,
                             border: `1px solid ${tag.color}40`,
-                            fontFamily:
-                              '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                            fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           }}
                           whileHover={{
                             scale: 1.05,
@@ -319,7 +286,6 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                     </motion.div>
                   </motion.div>
 
-                  {/* Personal Story */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -335,28 +301,24 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                         className="text-lg lg:text-xl leading-relaxed"
                         style={{
                           color: isDarkMode ? "#D1D5DB" : "#4B5563",
-                          fontFamily:
-                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           lineHeight: "1.8",
                         }}
                       >
-                        Currently in my third year of B.Tech Computer Science at
-                        MPSTME, I'm fascinated by the intersection of AI,
-                        machine learning, and real-world problem solving.
+                        Currently in my third year of B.Tech Computer Science at MPSTME, 
+                        I'm fascinated by the intersection of AI, machine learning, and real-world problem solving.
                       </p>
                       <p
                         className="text-lg lg:text-xl leading-relaxed"
                         style={{
                           color: isDarkMode ? "#D1D5DB" : "#4B5563",
-                          fontFamily:
-                            '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+                          fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
                           lineHeight: "1.8",
                         }}
                       >
-                        When I'm not coding, you'll find me experimenting with
-                        new frameworks, diving deep into research papers, or
-                        building something that might just change how we
-                        interact with technology.
+                        When I'm not coding, you'll find me experimenting with new frameworks, 
+                        diving deep into research papers, or building something that might just 
+                        change how we interact with technology.
                       </p>
                     </div>
                   </motion.div>
