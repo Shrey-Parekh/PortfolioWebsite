@@ -16,7 +16,6 @@ import {
   Rocket,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import ContactForm from "./ContactForm";
 
 interface Window {
   id: string;
@@ -1718,16 +1717,13 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 </div>
               </motion.div>
 
-              {/* Contact Form */}
-              <ContactForm isDarkMode={isDarkMode} />
-
               {/* Availability Status */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 1,
-                  delay: 1.2,
+                  delay: 0.9,
                   ease: [0.23, 1, 0.32, 1],
                 }}
                 className="text-center"
@@ -2070,16 +2066,13 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                 </div>
               </motion.div>
 
-              {/* Contact Form */}
-              <ContactForm isDarkMode={isDarkMode} />
-
               {/* Availability Status */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 1,
-                  delay: 1.8,
+                  delay: 1.2,
                   ease: [0.23, 1, 0.32, 1],
                 }}
                 className="text-center"
