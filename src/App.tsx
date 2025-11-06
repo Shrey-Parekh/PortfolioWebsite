@@ -91,6 +91,7 @@ function App() {
         about: "About Me",
         projects: "Projects",
         skills: "Skills & Stack",
+        experience: "Experience",
         contact: "Contact",
         blog: "Blog & Articles",
       };

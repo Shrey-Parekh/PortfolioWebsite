@@ -6,7 +6,8 @@ import {
   Code, 
   BookOpen,
   Briefcase,
-  MessageSquare
+  MessageSquare,
+  Award
 } from 'lucide-react'
 
 interface DockProps {
@@ -33,6 +34,7 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
     { id: 'about', icon: User, label: 'About Me', path: '/about' },
     { id: 'projects', icon: Briefcase, label: 'Projects', path: '/projects' },
     { id: 'skills', icon: Code, label: 'Skills', path: '/skills' },
+    { id: 'experience', icon: Award, label: 'Experience', path: '/experience' },
     { id: 'contact', icon: MessageSquare, label: 'Contact', path: '/contact' },
     { id: 'blog', icon: BookOpen, label: 'Blog & Articles', path: '/blog' }
   ]
@@ -85,7 +87,7 @@ const Dock: React.FC<DockProps> = ({ currentPage, setCurrentPage, onOpenWindow }
           const Icon = item.icon
           const isActive = currentPage === item.id
           const isHovered = hoveredItem === item.id
-          const isSeparator = index === 4 // Add separator before last 2 items
+          const isSeparator = index === 5 // Add separator before last 2 items
 
           return (
             <React.Fragment key={item.id}>
