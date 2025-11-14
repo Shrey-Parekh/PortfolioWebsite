@@ -738,6 +738,22 @@ const WindowManager: React.FC<WindowManagerProps> = ({
                   accent: "#14B8A6",
                   pattern: "education",
                 },
+                {
+                  title: "Game Arena",
+                  subtitle: "Multiplayer party games platform",
+                  description:
+                    "Real-time multiplayer party game platform featuring Never Have I Ever and Imposter games. Built with Socket.IO for seamless real-time gameplay, room-based sessions, and Supabase for scalable data management.",
+                  technologies: [
+                    "React",
+                    "Node.js",
+                    "Socket.IO",
+                    "Supabase",
+                    "Tailwind",
+                  ],
+                  link: "https://github.com/Shrey-Parekh/game-arena",
+                  accent: "#A855F7",
+                  pattern: "portal",
+                },
               ].map((project, index) => (
                 <motion.div
                   key={index}
